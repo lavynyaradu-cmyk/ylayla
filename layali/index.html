@@ -1,0 +1,589 @@
+<title>Layali</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Jost:wght@300;400;500&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+  :root{
+    --ink:#110D0C; --ink-2:#1B1514; --ink-3:#2A2120;
+    --wadha:#F1E9DA; --wadha-2:#E8DEC9; --paper:#FBF7EF;
+    --madder:#9B1B1E; --madder-deep:#6E1114;
+    --ochre:#C86A2A; --indigo:#2E4763;
+    --gold:#C9A24D; --gold-deep:#8F6F2A; --gold-pale:#E9D39A;
+    --on-ink:#F1E9DA; --on-ink-mute:#B7AA95;
+    --on-wadha:#1B1514; --on-wadha-mute:#6B5F52;
+    --display:"Bodoni Moda",Didot,"Times New Roman",serif;
+    --body:"Jost","Avenir Next","Helvetica Neue",Arial,sans-serif;
+    --arabic:"Amiri","Noto Naskh Arabic","Times New Roman",serif;
+    --measure:62ch;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--ink);color:var(--on-ink);font-family:var(--body);font-weight:300;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;line-height:1.05}
+  p{margin:0}
+  a{color:inherit}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .ar{font-family:var(--arabic);direction:rtl}
+  .eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:500}
+  .gold{color:var(--gold)}
+  .wrap{width:min(1180px,calc(100% - 48px));margin-inline:auto}
+  .num{font-variant-numeric:tabular-nums}
+
+  /* ---------- header ---------- */
+  header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--ink) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--ink-3)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:66px;gap:24px}
+  .brand{display:flex;align-items:baseline;gap:12px;text-decoration:none}
+  .brand .latin{font-family:var(--display);font-size:26px;letter-spacing:.06em}
+  .brand .ar{font-size:22px;color:var(--gold);line-height:1}
+  .links{display:flex;gap:28px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:400}
+  .links a{text-decoration:none;color:var(--on-ink-mute);transition:color .2s}
+  .links a:hover{color:var(--gold-pale)}
+  .cartbtn{display:flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:9px 16px;border:1px solid var(--gold-deep);color:var(--gold-pale);transition:background .2s}
+  .cartbtn:hover{background:var(--ink-3)}
+  .cartbtn .count{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;background:var(--madder);color:#fff;font-size:11px;border-radius:2px}
+  @media (max-width:760px){.links{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:72px 0 64px;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(44px,6.2vw,86px);letter-spacing:-.01em}
+  .hero h1 em{font-style:italic;color:var(--gold-pale)}
+  .hero .lede{max-width:var(--measure);margin-top:24px;font-size:18px;color:var(--on-ink-mute)}
+  .hero .ar-line{font-size:30px;color:var(--gold);margin-top:14px;display:inline-block}
+  .ctas{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;text-decoration:none;transition:transform .2s,background .2s,color .2s}
+  .btn-solid{background:var(--madder);color:#fff}
+  .btn-solid:hover{background:var(--madder-deep)}
+  .btn-line{border:1px solid var(--gold-deep);color:var(--gold-pale)}
+  .btn-line:hover{background:var(--ink-3)}
+  .weave{position:relative;aspect-ratio:3/4;max-height:560px;justify-self:end;width:100%;max-width:440px;margin:0 0 40px;box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
+  .weave svg{width:100%;height:100%;display:block}
+  .weave .rope{position:absolute;left:50%;top:-10px;transform:translateX(-50%);width:76%;height:6px;background:repeating-linear-gradient(90deg,var(--gold) 0 6px,var(--gold-deep) 6px 9px);border-radius:3px;box-shadow:0 2px 0 rgba(0,0,0,.4)}
+  .weave figcaption{position:absolute;left:0;right:0;bottom:-34px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--on-ink-mute)}
+  @media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.weave{justify-self:start;max-width:360px;margin-top:40px}}
+
+  .band{height:22px;width:100%;display:block}
+  .band svg{width:100%;height:100%;display:block}
+
+  /* ---------- collection ---------- */
+  .collection{background:var(--wadha);color:var(--on-wadha);padding:88px 0 96px}
+  .sec-head{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:48px}
+  .sec-head h2{font-size:clamp(34px,4.2vw,54px)}
+  .sec-head .eyebrow{color:var(--madder);margin-bottom:12px}
+  .sec-head p{max-width:46ch;color:var(--on-wadha-mute);font-size:15px}
+  @media (max-width:700px){.sec-head{grid-template-columns:1fr}}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  @media (max-width:960px){.grid{grid-template-columns:1fr;max-width:520px;margin-inline:auto}}
+  .product{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--wadha-2);transition:transform .25s,box-shadow .25s}
+  .product:hover{transform:translateY(-4px);box-shadow:0 30px 50px -30px rgba(27,21,20,.35)}
+  .product .art{aspect-ratio:1/1;display:grid;place-items:center;background:linear-gradient(180deg,var(--paper),var(--wadha));border-bottom:1px solid var(--wadha-2);position:relative;overflow:hidden}
+  .product .art svg{width:72%;height:72%;overflow:visible}
+  .tag{position:absolute;top:14px;left:14px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:6px 10px;background:var(--ink);color:var(--gold-pale)}
+  .tag.red{background:var(--madder);color:#fff}
+  .product .body{padding:24px 24px 26px;display:flex;flex-direction:column;gap:14px;flex:1}
+  .product .names{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .product h3{font-size:26px}
+  .product .names .ar{font-size:22px;color:var(--madder)}
+  .product .desc{color:var(--on-wadha-mute);font-size:14.5px}
+  .product ul{margin:0;padding:0;list-style:none;font-size:13px;display:grid;gap:5px;color:var(--on-wadha)}
+  .product ul li{display:flex;gap:10px}
+  .product ul li::before{content:"";width:6px;height:6px;margin-top:8px;flex:none;background:var(--ochre);transform:rotate(45deg)}
+  .buy{margin-top:auto;padding-top:16px;border-top:1px solid var(--wadha-2);display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+  .price{font-family:var(--display);font-size:24px}
+  .price small{font-family:var(--body);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-wadha-mute);margin-left:6px}
+  .price .min{display:block;font-family:var(--body);font-size:11px;letter-spacing:.06em;color:var(--on-wadha-mute);margin-top:2px}
+  .qty{display:inline-flex;border:1px solid var(--ink);height:40px}
+  .qty button{width:36px;font-size:18px;line-height:1}
+  .qty input{width:52px;text-align:center;border:0;border-inline:1px solid var(--ink);background:transparent;font:inherit;font-weight:400;color:inherit;-moz-appearance:textfield}
+  .qty input::-webkit-inner-spin-button,.qty input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+  .add{grid-column:1/-1;background:var(--ink);color:var(--gold-pale);padding:13px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;transition:background .2s}
+  .add:hover{background:var(--madder)}
+  .add.done{background:var(--gold-deep);color:#fff}
+
+  /* ---------- shajarah builder ---------- */
+  .shajarah{padding:96px 0;background:var(--ink)}
+  .shajarah .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+  @media (max-width:900px){.shajarah .wrap{grid-template-columns:1fr}}
+  .shajarah h2{font-size:clamp(34px,4.2vw,54px)}
+  .shajarah h2 em{font-style:italic;color:var(--gold-pale)}
+  .shajarah .eyebrow{color:var(--ochre);margin-bottom:12px}
+  .shajarah p.lede{color:var(--on-ink-mute);margin-top:18px;max-width:var(--measure)}
+  .form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+  .field{display:grid;gap:6px}
+  .field label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--on-ink-mute)}
+  .field input{background:var(--ink-2);border:1px solid var(--ink-3);color:var(--on-ink);padding:12px 14px;font:inherit;font-weight:400}
+  .field input:focus{border-color:var(--gold-deep);outline:none}
+  .field.full{grid-column:1/-1}
+  .apply{margin-top:18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .apply .note{font-size:13px;color:var(--on-ink-mute)}
+  .loom{background:var(--ink-2);border:1px solid var(--ink-3);padding:36px 32px 30px;position:relative}
+  .loom .laylat{font-family:var(--display);font-style:italic;font-size:clamp(22px,2.6vw,32px);color:var(--gold-pale);text-align:center;margin-bottom:22px}
+  .loom .laylat span{color:var(--on-ink)}
+  .loom svg{width:100%;height:auto;display:block}
+  .loom .meta{display:flex;justify-content:space-between;margin-top:18px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--on-ink-mute)}
+
+  /* ---------- occasions ---------- */
+  .occasions{border-top:1px solid var(--ink-3);border-bottom:1px solid var(--ink-3);background:var(--ink-2)}
+  .occasions .wrap{display:grid;grid-template-columns:repeat(5,1fr)}
+  .occ{padding:26px 20px;border-right:1px solid var(--ink-3);display:grid;gap:6px}
+  .occ:last-child{border-right:0}
+  .occ .t{font-family:var(--display);font-size:20px}
+  .occ .s{font-size:12px;color:var(--on-ink-mute);letter-spacing:.04em}
+  @media (max-width:900px){.occasions .wrap{grid-template-columns:repeat(2,1fr)}.occ{border-bottom:1px solid var(--ink-3)}.occ:nth-child(2n){border-right:0}}
+
+  /* ---------- weavers ---------- */
+  .weavers{background:var(--wadha);color:var(--on-wadha);padding:96px 0}
+  .weavers .wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  @media (max-width:900px){.weavers .wrap{grid-template-columns:1fr}}
+  .weavers h2{font-size:clamp(34px,4.2vw,54px)}
+  .weavers .eyebrow{color:var(--madder);margin-bottom:12px}
+  .weavers p{color:var(--on-wadha-mute);max-width:var(--measure)}
+  .weavers p+p{margin-top:16px}
+  .pledge{display:grid;gap:0;border-top:1px solid var(--ink)}
+  .pledge div{display:grid;grid-template-columns:1fr auto;gap:20px;padding:18px 0;border-bottom:1px solid var(--wadha-2);align-items:baseline}
+  .pledge .k{font-family:var(--display);font-size:22px}
+  .pledge .v{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--madder);text-align:right}
+
+  footer{padding:56px 0 40px;background:var(--ink)}
+  footer .wrap{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end}
+  footer .brand .latin{font-size:34px}
+  footer .fine{font-size:12px;color:var(--on-ink-mute);margin-top:10px;max-width:52ch;line-height:1.7}
+  footer .right{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-ink-mute);text-align:right;display:grid;gap:6px}
+  @media (max-width:700px){footer .wrap{grid-template-columns:1fr}footer .right{text-align:left}}
+
+  /* ---------- cart drawer ---------- */
+  .scrim{position:fixed;inset:0;background:rgba(10,7,6,.6);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--wadha);color:var(--on-wadha);z-index:50;transform:translateX(100%);transition:transform .3s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column}
+  body.cart-open .scrim{opacity:1;pointer-events:auto}
+  body.cart-open .drawer{transform:none}
+  .drawer .head{display:flex;justify-content:space-between;align-items:center;padding:22px 26px;border-bottom:1px solid var(--wadha-2)}
+  .drawer .head h3{font-size:26px}
+  .drawer .close{font-size:22px;line-height:1;padding:6px}
+  .drawer .items{flex:1;overflow:auto;padding:8px 26px}
+  .line{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:18px 0;border-bottom:1px solid var(--wadha-2)}
+  .line .sw{width:44px;height:44px;border:1px solid var(--wadha-2)}
+  .line .sw svg{display:block}
+  .line .n{font-family:var(--display);font-size:18px}
+  .line .d{font-size:12px;color:var(--on-wadha-mute);margin-top:2px}
+  .line .d .p{color:var(--madder)}
+  .line .r{text-align:right;display:grid;gap:6px;justify-items:end}
+  .line .r .amt{font-family:var(--display);font-size:18px}
+  .line .mini{display:inline-flex;border:1px solid var(--ink);height:28px;font-size:13px}
+  .line .mini button{width:26px}
+  .line .mini span{min-width:28px;display:grid;place-items:center;border-inline:1px solid var(--ink);font-weight:400}
+  .empty{padding:48px 0;text-align:center;color:var(--on-wadha-mute)}
+  .empty .ar{font-size:30px;color:var(--madder);display:block;margin-bottom:8px}
+  .drawer .foot{padding:20px 26px 26px;border-top:1px solid var(--ink);display:grid;gap:12px}
+  .drawer .row{display:flex;justify-content:space-between;font-size:14px}
+  .drawer .row.total{font-family:var(--display);font-size:22px}
+  .drawer .foot .hint{font-size:12px;color:var(--on-wadha-mute)}
+  .drawer .btn-solid{justify-content:center}
+
+  .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:var(--ink);color:var(--gold-pale);border:1px solid var(--gold-deep);padding:12px 20px;font-size:13px;letter-spacing:.08em;z-index:60;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;max-width:calc(100% - 40px);text-align:center}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Sadu weave: stripes (sada), teeth border (dhurus), diamond zigzag (uwairjan) -->
+    <pattern id="sadu" width="48" height="96" patternUnits="userSpaceOnUse">
+      <rect width="48" height="96" fill="#F1E9DA"/>
+      <rect y="0" width="48" height="8" fill="#9B1B1E"/>
+      <rect y="8" width="48" height="3" fill="#110D0C"/>
+      <rect y="11" width="48" height="3" fill="#F1E9DA"/>
+      <rect y="14" width="48" height="6" fill="#C86A2A"/>
+      <rect y="20" width="48" height="16" fill="#F1E9DA"/>
+      <polygon points="0,36 12,20 24,36" fill="#110D0C"/><polygon points="24,36 36,20 48,36" fill="#110D0C"/>
+      <rect y="36" width="48" height="4" fill="#9B1B1E"/>
+      <rect y="40" width="48" height="24" fill="#110D0C"/>
+      <polygon points="0,52 12,40 24,52 12,64" fill="#9B1B1E"/><polygon points="24,52 36,40 48,52 36,64" fill="#9B1B1E"/>
+      <polygon points="6,52 12,46 18,52 12,58" fill="#F1E9DA"/><polygon points="30,52 36,46 42,52 36,58" fill="#F1E9DA"/>
+      <polygon points="10,52 12,50 14,52 12,54" fill="#C86A2A"/><polygon points="34,52 36,50 38,52 36,54" fill="#C86A2A"/>
+      <rect y="64" width="48" height="4" fill="#9B1B1E"/>
+      <rect y="68" width="48" height="16" fill="#F1E9DA"/>
+      <polygon points="0,68 12,84 24,68" fill="#110D0C"/><polygon points="24,68 36,84 48,68" fill="#110D0C"/>
+      <rect y="84" width="48" height="6" fill="#C86A2A"/>
+      <rect y="90" width="48" height="3" fill="#F1E9DA"/>
+      <rect y="93" width="48" height="3" fill="#110D0C"/>
+    </pattern>
+    <!-- Narrow horizontal band used as a divider -->
+    <pattern id="sadu-h" width="96" height="22" patternUnits="userSpaceOnUse">
+      <rect width="96" height="22" fill="#9B1B1E"/>
+      <rect y="0" width="96" height="2" fill="#C9A24D"/>
+      <rect y="20" width="96" height="2" fill="#C9A24D"/>
+      <rect y="4" width="96" height="14" fill="#110D0C"/>
+      <polygon points="0,11 12,4 24,11 12,18" fill="#F1E9DA"/><polygon points="24,11 36,4 48,11 36,18" fill="#F1E9DA"/>
+      <polygon points="48,11 60,4 72,11 60,18" fill="#F1E9DA"/><polygon points="72,11 84,4 96,11 84,18" fill="#F1E9DA"/>
+      <polygon points="8,11 12,8 16,11 12,14" fill="#9B1B1E"/><polygon points="32,11 36,8 40,11 36,14" fill="#9B1B1E"/>
+      <polygon points="56,11 60,8 64,11 60,14" fill="#9B1B1E"/><polygon points="80,11 84,8 88,11 84,14" fill="#9B1B1E"/>
+    </pattern>
+    <linearGradient id="gold-g" x1="0" x2="1"><stop offset="0" stop-color="#8F6F2A"/><stop offset=".5" stop-color="#E9D39A"/><stop offset="1" stop-color="#8F6F2A"/></linearGradient>
+    <linearGradient id="walnut" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4A2E22"/><stop offset="1" stop-color="#2B1912"/></linearGradient>
+    <linearGradient id="walnut-top" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6A4331"/><stop offset="1" stop-color="#4A2E22"/></linearGradient>
+    <linearGradient id="soap" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBF7EF"/><stop offset="1" stop-color="#E4D8BE"/></linearGradient>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Layali home"><span class="latin">LAYALI</span><span class="ar">ليالي</span></a>
+    <nav class="links" aria-label="Sections">
+      <a href="#collection">Collection</a>
+      <a href="#shajarah">Your shajarah</a>
+      <a href="#weavers">The weavers</a>
+      <a href="#occasions">Occasions</a>
+    </nav>
+    <button class="cartbtn" id="open-cart" aria-label="Open cart">Cart <span class="count num" id="cart-count">0</span></button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow gold">Sadu gifting · Abu Dhabi</p>
+        <h1>Every couple<br>gets their own <em>shajarah.</em></h1>
+        <p class="ar ar-line">لكل عروسين شجرتهم</p>
+        <p class="lede">Women wove Sadu for the tent. The tent was the house. The house was the marriage. The central band of every weave, the shajarah, is the weaver's signature. Layali puts yours on the gifts your guests carry home.</p>
+        <div class="ctas">
+          <a class="btn btn-solid" href="#collection">Shop the collection</a>
+          <a class="btn btn-line" href="#shajarah">Build your shajarah</a>
+        </div>
+      </div>
+      <figure class="weave" aria-label="Hand-woven Sadu panel">
+        <div class="rope"></div>
+        <svg viewBox="0 0 440 586" role="img"><rect width="440" height="586" fill="url(#sadu)"/></svg>
+        <figcaption><span>Hand-woven · Al Dhafra</span><span>Wool &amp; camel hair</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="band" aria-hidden="true"><svg preserveAspectRatio="none"><rect width="100%" height="100%" fill="url(#sadu-h)"/></svg></div>
+
+  <section class="collection" id="collection">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">The collection</p>
+          <h2>Three gifts, one gold rope.</h2>
+        </div>
+        <p>Everything Layali makes is tied the same way. The rope is the signature you recognise before you read the name.</p>
+      </div>
+      <div class="grid" id="products"></div>
+    </div>
+  </section>
+
+  <div class="band" aria-hidden="true"><svg preserveAspectRatio="none"><rect width="100%" height="100%" fill="url(#sadu-h)"/></svg></div>
+
+  <section class="shajarah" id="shajarah">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Personalise</p>
+        <h2>Weave your names into <em>the band.</em></h2>
+        <p class="lede">Tell us the two names and the night. We engrave the shajarah on the mandoos lid, print it on the sachet card, and tie it into every rope tag. Laylat, "the night of", is completed by your order.</p>
+        <div class="form">
+          <div class="field"><label for="n1">First name</label><input id="n1" value="Hessa" autocomplete="off"></div>
+          <div class="field"><label for="n2">Second name</label><input id="n2" value="Saif" autocomplete="off"></div>
+          <div class="field full"><label for="dt">The night</label><input id="dt" type="date" value="2026-12-18"></div>
+        </div>
+        <div class="apply">
+          <button class="btn btn-line" id="apply-shajarah">Apply to my order</button>
+          <span class="note" id="apply-note">Personalisation is included on all three pieces.</span>
+        </div>
+      </div>
+      <div class="loom">
+        <p class="laylat">Laylat <span id="lay-names">Hessa &amp; Saif</span></p>
+        <svg id="loom-svg" viewBox="0 0 520 200" role="img" aria-label="Your shajarah band preview">
+          <rect width="520" height="200" fill="#F1E9DA"/>
+          <rect y="0" width="520" height="10" fill="#9B1B1E"/>
+          <rect y="10" width="520" height="4" fill="#110D0C"/>
+          <rect y="18" width="520" height="8" fill="#C86A2A"/>
+          <g id="teeth-top"></g>
+          <rect y="50" width="520" height="100" fill="#110D0C"/>
+          <g id="diamonds"></g>
+          <g id="initials" font-family="Bodoni Moda,serif" font-size="46" text-anchor="middle" fill="#E9D39A">
+            <text x="184" y="116" id="i1">H</text>
+            <text x="260" y="116" font-size="30" fill="#C9A24D">&amp;</text>
+            <text x="336" y="116" id="i2">S</text>
+          </g>
+          <g id="teeth-bot"></g>
+          <rect y="174" width="520" height="8" fill="#C86A2A"/>
+          <rect y="186" width="520" height="4" fill="#110D0C"/>
+          <rect y="190" width="520" height="10" fill="#9B1B1E"/>
+        </svg>
+        <div class="meta"><span>Shajarah № <span id="shaj-no" class="num">0001</span></span><span id="shaj-date">18 December 2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="occasions" id="occasions">
+    <div class="wrap">
+      <div class="occ"><span class="t">Weddings</span><span class="s">Guest favours, 50 to 500</span></div>
+      <div class="occ"><span class="t">Henna night</span><span class="s">Red-dominant kit</span></div>
+      <div class="occ"><span class="t">Eid</span><span class="s">Family boxes</span></div>
+      <div class="occ"><span class="t">National Day</span><span class="s">2 December · corporate</span></div>
+      <div class="occ"><span class="t">Majlis &amp; hotels</span><span class="s">Amenities, VIP gifts</span></div>
+    </div>
+  </section>
+
+  <section class="weavers" id="weavers">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">The weavers</p>
+        <h2>Real Sadu, from real looms.</h2>
+        <p style="margin-top:22px">Printed ribbon reads as souvenir shop. Every Layali hero piece carries a strip cut from a hand-woven length, made on a ground loom by women in Al Dhafra and through the Sougha programme. The colours are the ones they have always used: madder red, black wool, undyed white, and the ochre that comes from the desert.</p>
+        <p>Al Sadu is inscribed on the UNESCO list of intangible heritage in need of urgent safeguarding. We are not lifting a motif. We are commissioning it, naming the weaver on the card, and paying for the work.</p>
+      </div>
+      <div class="pledge">
+        <div><span class="k">Woven, never printed</span><span class="v">Every hero piece</span></div>
+        <div><span class="k">Weaver named on the card</span><span class="v">Always</span></div>
+        <div><span class="k">Natural henna only</span><span class="v">No PPD, no black henna</span></div>
+        <div><span class="k">Saffron certified</span><span class="v">ISO 3632 Grade I</span></div>
+        <div><span class="k">Same rope on every piece</span><span class="v">Gold, hand-tied</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="band" aria-hidden="true"><svg preserveAspectRatio="none"><rect width="100%" height="100%" fill="url(#sadu-h)"/></svg></div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <span class="brand"><span class="latin">LAYALI</span><span class="ar">ليالي</span></span>
+      <p class="fine">Layali, "nights". Sadu gifting for weddings, Eid, National Day and the majlis. Abu Dhabi, United Arab Emirates. Guest favours ship chilled where henna is included.</p>
+    </div>
+    <div class="right">
+      <span>hello@layali.ae</span>
+      <span>Trade orders · corporate@layali.ae</span>
+      <span>© 2026 Layali</span>
+    </div>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Cart" aria-hidden="true">
+  <div class="head"><h3>Your order</h3><button class="close" id="close-cart" aria-label="Close cart">×</button></div>
+  <div class="items" id="cart-items"></div>
+  <div class="foot">
+    <div class="row"><span>Pieces</span><span class="num" id="sum-pieces">0</span></div>
+    <div class="row"><span>Personalisation</span><span id="sum-shaj">Not applied</span></div>
+    <div class="row total"><span>Subtotal</span><span class="num" id="sum-total">AED 0</span></div>
+    <p class="hint">Favour pricing is per guest. Quotes for 200 or more pieces include a weaver's certificate and delivery within the UAE.</p>
+    <button class="btn btn-solid" id="checkout">Request a quote</button>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+  const AED = n => 'AED ' + n.toLocaleString('en-AE');
+
+  // ---------- product illustrations (SVG) ----------
+  const art = {
+    sachet: `
+      <svg viewBox="0 0 220 260" role="img" aria-label="Sadu henna sachet with gold rope">
+        <ellipse cx="110" cy="248" rx="70" ry="8" fill="rgba(27,21,20,.12)"/>
+        <path d="M46 70 C40 120 36 180 50 232 Q110 252 170 232 C184 180 180 120 174 70 Z" fill="url(#sadu)" stroke="#110D0C" stroke-width="1.5"/>
+        <path d="M46 70 Q110 92 174 70 L172 60 Q110 80 48 60 Z" fill="#110D0C"/>
+        <path d="M52 62 Q110 84 168 62" fill="none" stroke="url(#gold-g)" stroke-width="7" stroke-linecap="round"/>
+        <path d="M52 62 Q110 84 168 62" fill="none" stroke="#8F6F2A" stroke-width="7" stroke-dasharray="3 5" stroke-linecap="round" opacity=".6"/>
+        <path d="M150 66 q10 14 2 38 M154 66 q16 12 12 40" fill="none" stroke="url(#gold-g)" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M152 104 l-6 12 M166 106 l-4 12" stroke="#8F6F2A" stroke-width="3" stroke-linecap="round"/>
+        <path d="M78 34 C78 20 100 12 118 14 C138 16 148 34 140 48 L128 66 Q110 72 92 66 Z" fill="#FBF7EF" stroke="#110D0C" stroke-width="1.5"/>
+        <path d="M84 40 q26 -14 50 2" fill="none" stroke="#9B1B1E" stroke-width="1.5"/>
+      </svg>`,
+    soap: `
+      <svg viewBox="0 0 220 260" role="img" aria-label="Soap block with Sadu ribbon">
+        <ellipse cx="110" cy="220" rx="86" ry="10" fill="rgba(27,21,20,.12)"/>
+        <path d="M30 96 L118 76 L192 100 L192 190 L104 214 L30 190 Z" fill="url(#soap)" stroke="#B8AA8E" stroke-width="1.2"/>
+        <path d="M30 96 L104 118 L192 100" fill="none" stroke="#C9BDA2" stroke-width="1.2"/>
+        <path d="M104 118 L104 214" stroke="#C9BDA2" stroke-width="1.2"/>
+        <path d="M30 96 L104 118 L104 214 L30 190 Z" fill="rgba(27,21,20,.06)"/>
+        <path d="M90 86 L112 80 L122 84 L110 122 L126 128 L126 218 L100 210 L100 128 Z" fill="url(#sadu)" stroke="#110D0C" stroke-width="1"/>
+        <path d="M90 86 L111 91 L100 128 L90 124 Z" fill="rgba(27,21,20,.08)"/>
+        <path d="M108 60 q6 18 -2 32" fill="none" stroke="url(#gold-g)" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="108" cy="58" r="6" fill="none" stroke="url(#gold-g)" stroke-width="3"/>
+        <text x="140" y="172" font-family="Bodoni Moda,serif" font-size="13" fill="#6B5F52" font-style="italic" transform="rotate(12 140 172)">Layali</text>
+      </svg>`,
+    mandoos: `
+      <svg viewBox="0 0 220 260" role="img" aria-label="Walnut box with Sadu interior and saffron vial">
+        <ellipse cx="110" cy="236" rx="92" ry="9" fill="rgba(27,21,20,.14)"/>
+        <path d="M26 132 L112 106 L196 130 L196 206 L112 232 L26 206 Z" fill="url(#walnut)"/>
+        <path d="M26 132 L112 158 L196 130 L112 106 Z" fill="url(#sadu)"/>
+        <path d="M26 132 L112 158 L196 130" fill="none" stroke="#110D0C" stroke-width="1.5"/>
+        <path d="M112 158 L112 232" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
+        <path d="M34 128 L112 152 L188 128 L112 108 Z" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="1"/>
+        <path d="M46 126 L112 146 L178 126 L112 110 Z" fill="rgba(17,13,12,.25)"/>
+        <g transform="translate(112 132) rotate(-16)">
+          <rect x="-8" y="-24" width="16" height="42" rx="4" fill="#E9D39A" stroke="#8F6F2A" stroke-width="1"/>
+          <rect x="-6" y="-8" width="12" height="22" rx="3" fill="#9B1B1E"/>
+          <path d="M-4 -4 q3 6 8 8 M-2 2 q2 5 6 6" stroke="#C86A2A" stroke-width="1.2" fill="none"/>
+          <rect x="-6" y="-32" width="12" height="10" rx="2" fill="#A07B4B" stroke="#6B4E2C"/>
+        </g>
+        <path d="M60 60 L146 36 L230 60 L144 84 Z" fill="url(#walnut-top)" transform="translate(-30 40)"/>
+        <path d="M30 100 L116 76 L200 100 L114 124 Z" fill="none" stroke="#110D0C" stroke-width="1.2"/>
+        <g transform="translate(115 100) skewX(-6) scale(1 .55)" font-family="Bodoni Moda,serif" font-size="12" fill="#C9A24D" text-anchor="middle">
+          <polygon points="-26,0 0,-16 26,0 0,16" fill="none" stroke="#C9A24D" stroke-width="1.2"/>
+          <text y="4" class="box-initials">H &amp; S</text>
+        </g>
+        <path d="M112 96 l-16 -8 M116 96 l16 -8" stroke="url(#gold-g)" stroke-width="3" stroke-linecap="round"/>
+      </svg>`
+  };
+
+  // ---------- products (from the brand brainstorm) ----------
+  const products = [
+    { id:'sachet', ar:'خيطة', name:'Khaitha Sachet', tag:'Henna night', tagClass:'red',
+      desc:'A hand-woven Sadu pouch closed with the gold rope. Inside, a natural henna cone and a die-cut Sadu stencil card. Pull the thread after the henna is used and the strip becomes a wristband carrying your names.',
+      list:['Real woven Sadu strip, wool on cotton','8 g natural BAQ henna cone, no PPD, no added dye','Sadu stencil card: triangle border, diamond, shajarah strip','2 ml lemon-sugar sealant vial, bilingual story card'],
+      price:45, unit:'per guest', min:'Minimum 50 · shipped chilled' },
+    { id:'soap', ar:'وضحى', name:'Wadha Soap', tag:'Wedding day', tagClass:'',
+      desc:'A cold-process olive and frankincense block on the white ground the weavers call wadha. A ring of real Sadu ribbon circles it, and the rope tag carries the couple’s shajarah.',
+      list:['140 g olive oil and frankincense soap, hand-cut','Woven Sadu ribbon, 20 mm, tied with the gold rope','Stamped Layali mark on the face','Wrapped in ivory tissue, boxed by the dozen'],
+      price:38, unit:'per guest', min:'Minimum 50' },
+    { id:'mandoos', ar:'مندوس', name:'The Mandoos', tag:'Hero · hand-woven', tagClass:'',
+      desc:'A miniature dowry chest in solid walnut with a sliding lid. Your shajarah is engraved on the lid; the real woven Sadu waits inside as the reveal, cradling a corked vial of saffron.',
+      list:['Solid walnut, 10 × 7 × 4 cm, sliding lid','Hand-woven Sadu in a recessed channel, bottle cut-out','2 g Negin saffron, ISO 3632 Grade I, lab certificate','Cork sealed with madder-red wax, gold rope closure'],
+      price:120, unit:'per piece', min:'Family &amp; VIP tier · from 20' }
+  ];
+
+  // ---------- state ----------
+  let cart = {};
+  let shaj = null;
+  try { const s = localStorage.getItem('layali-cart'); if (s) cart = JSON.parse(s) || {}; } catch(e){}
+  try { const s = localStorage.getItem('layali-shajarah'); if (s) shaj = JSON.parse(s); } catch(e){}
+  const save = () => { try { localStorage.setItem('layali-cart', JSON.stringify(cart)); localStorage.setItem('layali-shajarah', JSON.stringify(shaj)); } catch(e){} };
+
+  // ---------- render products ----------
+  const grid = document.getElementById('products');
+  grid.innerHTML = products.map(p => `
+    <article class="product" data-id="${p.id}">
+      <div class="art">${p.tag ? `<span class="tag ${p.tagClass}">${p.tag}</span>` : ''}${art[p.id]}</div>
+      <div class="body">
+        <div class="names"><h3>${p.name}</h3><span class="ar">${p.ar}</span></div>
+        <p class="desc">${p.desc}</p>
+        <ul>${p.list.map(l => `<li>${l}</li>`).join('')}</ul>
+        <div class="buy">
+          <div class="price"><span class="num">${AED(p.price)}</span><small>${p.unit}</small><span class="min">${p.min}</span></div>
+          <div class="qty" aria-label="Quantity">
+            <button type="button" data-step="-1" aria-label="Fewer">−</button>
+            <input type="number" min="1" value="${p.id==='mandoos'?20:50}" class="num" aria-label="Quantity for ${p.name}">
+            <button type="button" data-step="1" aria-label="More">+</button>
+          </div>
+          <button class="add" type="button">Add to order</button>
+        </div>
+      </div>
+    </article>`).join('');
+
+  grid.addEventListener('click', e => {
+    const card = e.target.closest('.product'); if (!card) return;
+    const input = card.querySelector('input');
+    const step = e.target.closest('[data-step]');
+    if (step) { input.value = Math.max(1, (parseInt(input.value)||1) + parseInt(step.dataset.step)); return; }
+    const add = e.target.closest('.add');
+    if (add) {
+      const id = card.dataset.id, q = Math.max(1, parseInt(input.value)||1);
+      cart[id] = (cart[id]||0) + q;
+      save(); renderCart();
+      add.textContent = 'Added'; add.classList.add('done');
+      setTimeout(() => { add.textContent = 'Add to order'; add.classList.remove('done'); }, 1400);
+      toast(`${q} × ${products.find(p=>p.id===id).name} added to your order`);
+    }
+  });
+
+  // ---------- cart drawer ----------
+  const drawer = document.getElementById('drawer');
+  const openCart = () => { document.body.classList.add('cart-open'); drawer.setAttribute('aria-hidden','false'); };
+  const closeCart = () => { document.body.classList.remove('cart-open'); drawer.setAttribute('aria-hidden','true'); };
+  document.getElementById('open-cart').addEventListener('click', openCart);
+  document.getElementById('close-cart').addEventListener('click', closeCart);
+  document.getElementById('scrim').addEventListener('click', closeCart);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
+
+  const itemsEl = document.getElementById('cart-items');
+  function renderCart(){
+    const ids = Object.keys(cart).filter(id => cart[id] > 0);
+    let pieces = 0, total = 0;
+    if (!ids.length) {
+      itemsEl.innerHTML = `<div class="empty"><span class="ar">فارغ</span>Your order is empty. Start with a favour, or the mandoos.</div>`;
+    } else {
+      itemsEl.innerHTML = ids.map(id => {
+        const p = products.find(x => x.id === id), q = cart[id], amt = p.price * q;
+        pieces += q; total += amt;
+        return `<div class="line" data-id="${id}">
+          <div class="sw"><svg width="42" height="42"><rect width="42" height="42" fill="url(#sadu)"/></svg></div>
+          <div><div class="n">${p.name}</div><div class="d">${AED(p.price)} ${p.unit}${shaj ? ` · <span class="p">Laylat ${shaj.n1} &amp; ${shaj.n2}</span>` : ''}</div></div>
+          <div class="r"><span class="amt num">${AED(amt)}</span>
+            <span class="mini"><button data-d="-1" aria-label="Fewer">−</button><span class="num">${q}</span><button data-d="1" aria-label="More">+</button></span></div>
+        </div>`;
+      }).join('');
+    }
+    document.getElementById('cart-count').textContent = pieces;
+    document.getElementById('sum-pieces').textContent = pieces;
+    document.getElementById('sum-total').textContent = AED(total);
+    document.getElementById('sum-shaj').textContent = shaj ? `Laylat ${shaj.n1} & ${shaj.n2}` : 'Not applied';
+  }
+  itemsEl.addEventListener('click', e => {
+    const b = e.target.closest('[data-d]'); if (!b) return;
+    const id = b.closest('.line').dataset.id;
+    cart[id] = Math.max(0, (cart[id]||0) + parseInt(b.dataset.d));
+    if (!cart[id]) delete cart[id];
+    save(); renderCart();
+  });
+  document.getElementById('checkout').addEventListener('click', () => {
+    const pieces = Object.values(cart).reduce((a,b)=>a+b,0);
+    if (!pieces) { toast('Add a piece before requesting a quote'); return; }
+    toast('Quote request noted. Layali will reply within one working day.');
+    closeCart();
+  });
+
+  // ---------- shajarah builder ----------
+  const n1 = document.getElementById('n1'), n2 = document.getElementById('n2'), dt = document.getElementById('dt');
+  const teethTop = document.getElementById('teeth-top'), teethBot = document.getElementById('teeth-bot'), diamonds = document.getElementById('diamonds');
+  let t = '', b = '';
+  for (let x = 0; x < 520; x += 20) {
+    t += `<polygon points="${x},50 ${x+10},30 ${x+20},50" fill="#110D0C"/>`;
+    b += `<polygon points="${x},150 ${x+10},170 ${x+20},150" fill="#110D0C"/>`;
+  }
+  teethTop.innerHTML = t; teethBot.innerHTML = b;
+  let d = '';
+  for (let x = 0; x < 520; x += 40) {
+    const centre = x + 20;
+    if (centre > 140 && centre < 380) continue;
+    d += `<polygon points="${centre-20},100 ${centre},70 ${centre+20},100 ${centre},130" fill="#9B1B1E"/>
+          <polygon points="${centre-10},100 ${centre},85 ${centre+10},100 ${centre},115" fill="#F1E9DA"/>
+          <polygon points="${centre-4},100 ${centre},94 ${centre+4},100 ${centre},106" fill="#C86A2A"/>`;
+  }
+  d += `<polygon points="150,100 260,60 370,100 260,140" fill="#9B1B1E"/><polygon points="164,100 260,68 356,100 260,132" fill="none" stroke="#C9A24D" stroke-width="1.5"/>`;
+  diamonds.innerHTML = d;
+
+  const cap = s => s.trim().charAt(0).toUpperCase() || '·';
+  const fmtDate = v => { const dd = new Date(v + 'T00:00:00'); return isNaN(dd) ? '' : dd.toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'}); };
+  function paint(){
+    const a = n1.value.trim() || 'Hessa', c = n2.value.trim() || 'Saif';
+    document.getElementById('i1').textContent = cap(a);
+    document.getElementById('i2').textContent = cap(c);
+    document.getElementById('lay-names').innerHTML = `${a.replace(/[<>&]/g,'')} &amp; ${c.replace(/[<>&]/g,'')}`;
+    document.getElementById('shaj-date').textContent = fmtDate(dt.value) || 'Choose a night';
+    document.querySelectorAll('.box-initials').forEach(el => el.textContent = `${cap(a)} & ${cap(c)}`);
+    let h = 0; for (const ch of (a + c + dt.value)) h = (h * 31 + ch.charCodeAt(0)) % 9973;
+    document.getElementById('shaj-no').textContent = String(h).padStart(4,'0');
+  }
+  [n1, n2, dt].forEach(el => el.addEventListener('input', paint));
+  document.getElementById('apply-shajarah').addEventListener('click', () => {
+    shaj = { n1: n1.value.trim() || 'Hessa', n2: n2.value.trim() || 'Saif', date: dt.value };
+    save(); renderCart();
+    document.getElementById('apply-note').textContent = `Applied: Laylat ${shaj.n1} & ${shaj.n2}, ${fmtDate(shaj.date)}.`;
+    toast('Your shajarah is on the order');
+  });
+  if (shaj) { n1.value = shaj.n1; n2.value = shaj.n2; if (shaj.date) dt.value = shaj.date;
+    document.getElementById('apply-note').textContent = `Applied: Laylat ${shaj.n1} & ${shaj.n2}, ${fmtDate(shaj.date)}.`; }
+  paint(); renderCart();
+
+  // ---------- toast ----------
+  const toastEl = document.getElementById('toast'); let tt;
+  function toast(msg){ toastEl.textContent = msg; toastEl.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toastEl.classList.remove('show'), 2400); }
+})();
+</script>
