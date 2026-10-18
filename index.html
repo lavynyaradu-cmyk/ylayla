@@ -158,6 +158,10 @@
   .product ul{margin:0;padding:0;list-style:none;font-size:13px;display:grid;gap:6px}
   .product ul li{display:flex;gap:10px}
   .product ul li::before{content:"";width:6px;height:6px;margin-top:8px;flex:none;background:var(--gold);transform:rotate(45deg)}
+  .customise{display:flex;align-items:center;justify-content:space-between;gap:10px;text-decoration:none;border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);padding:11px 14px;font-family:var(--caps);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-pale);transition:background .25s,border-color .25s}
+  .customise span{transition:transform .3s var(--ease)}
+  .customise:hover{background:color-mix(in srgb,var(--gold) 12%,transparent);border-color:var(--gold)}
+  .customise:hover span{transform:translateX(4px)}
   .buy{margin-top:auto;padding-top:16px;border-top:1px solid color-mix(in srgb,var(--gold) 25%,transparent);display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
   .price{font-family:var(--display);font-size:26px;font-weight:600;color:var(--gold-pale)}
   .price small{font-family:var(--caps);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--on-night-mute);margin-left:6px;font-weight:400}
@@ -316,6 +320,7 @@
     <a class="brand" href="#top" aria-label="YLAYLA home"><span class="latin gold-text">YLAYLA</span><span class="ar">يا ليالي</span></a>
     <nav class="links" aria-label="Sections">
       <a href="#collection">Collection</a>
+      <a href="atelier.html">Atelier</a>
       <a href="#shajarah">Your shajarah</a>
       <a href="#weavers">The weavers</a>
       <a href="#occasions">Occasions</a>
@@ -330,6 +335,7 @@
 <div class="menu" id="menu" aria-hidden="true">
   <nav>
     <a href="#collection">Collection</a>
+    <a href="atelier.html">Atelier</a>
     <a href="#shajarah">Your shajarah</a>
     <a href="#weavers">The weavers</a>
     <a href="#occasions">Occasions</a>
@@ -594,6 +600,7 @@
     { id:'sachet', ar:'خيطة', name:'Khaitha Sachet', tag:'Henna night', tagClass:'red',
       desc:'A hand-woven Sadu pouch closed with the gold rope. Inside, a natural henna cone and a die-cut Sadu stencil card. Pull the thread after the henna is used and the strip becomes a wristband carrying your names.',
       list:['Real woven Sadu strip, wool on cotton','8 g natural BAQ henna cone, no PPD, no added dye','Sadu stencil card: triangle border, diamond, shajarah strip','2 ml lemon-sugar sealant vial, bilingual story card'],
+      cta:'Build it in 3D · four weaves, three ropes, three stoppers',
       price:45, unit:'per guest', min:'Minimum 50 · shipped chilled' },
     { id:'soap', ar:'وضحى', name:'Wadha Soap', tag:'Wedding day', tagClass:'',
       desc:'A cold-process olive and frankincense block on the white ground the weavers call wadha. A ring of real Sadu ribbon circles it, and the rope tag carries the couple’s shajarah.',
@@ -605,9 +612,10 @@
       price:120, unit:'per piece', min:'Family &amp; VIP tier · from 20' }
   ];
 
-  let cart = {}, shaj = null;
+  let cart = {}, shaj = null, sachetCfg = null;
   try { const s = localStorage.getItem('ylayla-cart'); if (s) cart = JSON.parse(s) || {}; } catch(e){}
   try { const s = localStorage.getItem('ylayla-shajarah'); if (s) shaj = JSON.parse(s); } catch(e){}
+  try { const s = localStorage.getItem('ylayla-sachet-config'); if (s) sachetCfg = JSON.parse(s); } catch(e){}
   const save = () => { try { localStorage.setItem('ylayla-cart', JSON.stringify(cart)); localStorage.setItem('ylayla-shajarah', JSON.stringify(shaj)); } catch(e){} };
 
   const grid = document.getElementById('products');
@@ -619,6 +627,7 @@
         <div class="names"><h3>${p.name}</h3><span class="ar">${p.ar}</span></div>
         <p class="desc">${p.desc}</p>
         <ul>${p.list.map(l => `<li>${l}</li>`).join('')}</ul>
+        ${p.cta ? `<a class="customise" href="atelier.html">${p.cta}<span>→</span></a>` : ''}
         <div class="buy">
           <div class="price"><span class="num">${AED(p.price)}</span><small>${p.unit}</small><span class="min">${p.min}</span></div>
           <div class="qty" aria-label="Quantity">
@@ -678,11 +687,13 @@
       itemsEl.innerHTML = `<div class="empty"><span class="ar">فارغ</span>Your order is empty. Start with a favour, or the mandoos.</div>`;
     } else {
       itemsEl.innerHTML = ids.map(id => {
-        const p = products.find(x => x.id === id), q = cart[id], amt = p.price * q;
+        const p = products.find(x => x.id === id), q = cart[id];
+        const cfg = id === 'sachet' ? sachetCfg : null;
+        const unit = cfg && cfg.price ? cfg.price : p.price, amt = unit * q;
         pieces += q; total += amt;
         return `<div class="line" data-id="${id}">
           <div class="sw"><svg width="44" height="44"><rect width="44" height="44" fill="url(#sadu)"/></svg></div>
-          <div><div class="n">${p.name}</div><div class="d">${AED(p.price)} ${p.unit}${shaj ? ` · <span class="p">Laylat ${esc(shaj.n1)} &amp; ${esc(shaj.n2)}</span>` : ''}</div></div>
+          <div><div class="n">${p.name}</div><div class="d">${AED(unit)} ${p.unit}${cfg ? `<br><span class="p">${esc(cfg.weave)} · ${esc(cfg.rope)} · ${esc(cfg.stopper)} · ${esc(cfg.ref)}</span>` : ''}${shaj ? ` · <span class="p">Laylat ${esc(shaj.n1)} &amp; ${esc(shaj.n2)}</span>` : ''}</div></div>
           <div class="r"><span class="amt num">${AED(amt)}</span>
             <span class="mini"><button data-d="-1" aria-label="Fewer">−</button><span class="num">${q}</span><button data-d="1" aria-label="More">+</button></span></div>
         </div>`;

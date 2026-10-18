@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Sachet Atelier</title>
+<meta name="description" content="Turn the Khaitha sachet in your hands. Choose the Sadu weave, the gold rope and the stopper, and see the piece build itself.">
+<meta name="theme-color" content="#383322">
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&family=Amiri:ital,wght@0,400;0,700&display=swap">
+<style>
+  :root{
+    --night:#383322; --night-2:#2C2819; --night-3:#454026; --night-4:#57503A;
+    --sand:#EFE3C6; --sand-2:#DCCB9E; --paper:#F8F1DF;
+    --gold:#C9A24D; --gold-deep:#8A6A2B; --gold-pale:#F0DA8E; --gold-light:#FFF3C4;
+    --madder:#9B1B1E; --ochre:#C86A2A;
+    --on-night:#EFE3C6; --on-night-mute:#B8AB86;
+    --gold-grad:linear-gradient(110deg,#8A6A2B 0%,#C9A24D 25%,#F0DA8E 48%,#FFF3C4 52%,#F0DA8E 56%,#C9A24D 75%,#8A6A2B 100%);
+    --display:"Cormorant Garamond",Garamond,"Times New Roman",serif;
+    --caps:"Cinzel",Garamond,serif;
+    --body:"Jost","Avenir Next","Helvetica Neue",Arial,sans-serif;
+    --arabic:"Amiri","Noto Naskh Arabic","Times New Roman",serif;
+    --ease:cubic-bezier(.2,.7,.2,1);
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--night);color:var(--on-night);font-family:var(--body);font-weight:300;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body.lock{overflow:hidden}
+  h1,h2,h3{font-family:var(--display);font-weight:500;margin:0;line-height:1.04;text-wrap:balance}
+  p{margin:0}
+  img{max-width:100%;display:block}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .ar{font-family:var(--arabic);direction:rtl}
+  .eyebrow{font-family:var(--caps);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+  .wrap{width:min(1280px,calc(100% - 40px));margin-inline:auto}
+  .num{font-variant-numeric:tabular-nums}
+  .gold-text{background:var(--gold-grad);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 7s linear infinite}
+  @keyframes shine{to{background-position:220% center}}
+
+  header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--night) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid color-mix(in srgb,var(--gold) 25%,transparent)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .brand .latin{font-family:var(--caps);font-size:22px;letter-spacing:.28em;font-weight:600}
+  .brand .ar{font-size:20px;color:var(--gold);line-height:1;margin-top:-2px}
+  .links{display:flex;gap:28px;font-family:var(--caps);font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+  .links a{text-decoration:none;color:var(--on-night-mute);transition:color .25s;position:relative;padding:6px 0}
+  .links a.here{color:var(--gold-pale)}
+  .links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+  .links a.here::after,.links a:hover::after{transform:scaleX(1);transform-origin:left}
+  .links a:hover{color:var(--gold-pale)}
+  .back{display:inline-flex;align-items:center;gap:8px;font-family:var(--caps);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--gold-pale);border:1px solid var(--gold-deep);padding:10px 14px;transition:background .25s}
+  .back:hover{background:var(--night-3)}
+  @media (max-width:860px){.links{display:none}}
+
+  .intro{padding:30px 0 10px}
+  .intro .wrap{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end}
+  .intro h1{font-size:clamp(38px,5.4vw,66px)}
+  .intro .eyebrow{display:block;margin-bottom:12px}
+  .intro p{color:var(--on-night-mute);max-width:56ch;margin-top:12px;font-size:15.5px}
+  .intro .ar{font-size:26px;color:var(--gold)}
+  @media (max-width:760px){.intro .wrap{grid-template-columns:1fr}}
+
+  /* ---------- studio layout ---------- */
+  .studio{padding:26px 0 80px}
+  .studio .wrap{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:28px;align-items:start}
+  @media (max-width:1040px){.studio .wrap{grid-template-columns:1fr}}
+
+  .stage{position:relative;background:radial-gradient(90% 70% at 50% 18%,#4A4430,#332F1F 60%,#272418);border:1px solid color-mix(in srgb,var(--gold) 30%,transparent);aspect-ratio:1/1;max-height:min(74vh,760px);overflow:hidden;touch-action:none;cursor:grab}
+  .stage.dragging{cursor:grabbing}
+  .stage canvas{display:block;width:100%;height:100%}
+  .stage::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 120px rgba(20,17,8,.75)}
+  .corner{position:absolute;width:16px;height:16px;border:1px solid var(--gold);pointer-events:none;z-index:2}
+  .corner.tl{top:10px;left:10px;border-right:0;border-bottom:0}
+  .corner.tr{top:10px;right:10px;border-left:0;border-bottom:0}
+  .corner.bl{bottom:10px;left:10px;border-right:0;border-top:0}
+  .corner.br{bottom:10px;right:10px;border-left:0;border-top:0}
+  .stage .hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);font-family:var(--caps);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--on-night-mute);background:rgba(28,25,15,.6);padding:7px 14px;border:1px solid color-mix(in srgb,var(--gold) 25%,transparent);z-index:2;transition:opacity .5s;pointer-events:none}
+  .stage .hint.gone{opacity:0}
+  .stage .loading{position:absolute;inset:0;display:grid;place-items:center;gap:14px;z-index:3;background:var(--night-2);transition:opacity .6s}
+  .stage .loading.gone{opacity:0;pointer-events:none}
+  .stage .loading .spin{width:40px;height:40px;border:1px solid var(--gold-deep);border-top-color:var(--gold-pale);border-radius:50%;animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .stage .loading span{font-family:var(--caps);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--on-night-mute)}
+  .stagebar{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--gold-deep);padding:9px 14px;font-family:var(--caps);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-pale);transition:background .25s,border-color .25s}
+  .chip:hover{background:var(--night-3);border-color:var(--gold)}
+  .chip.on{background:color-mix(in srgb,var(--gold) 16%,transparent);border-color:var(--gold)}
+  .chip svg{width:13px;height:13px;flex:none}
+
+  /* ---------- panel ---------- */
+  .panel{display:grid;gap:22px;position:sticky;top:88px}
+  @media (max-width:1040px){.panel{position:static}}
+  .group{border:1px solid color-mix(in srgb,var(--gold) 26%,transparent);background:linear-gradient(180deg,var(--night-3),var(--night-2));padding:20px}
+  .group > header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;background:none;border:0;position:static;height:auto;backdrop-filter:none;padding:0;margin-bottom:14px}
+  .group h2{font-size:25px}
+  .group .step{font-family:var(--caps);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+  .group .pick{font-size:13px;color:var(--on-night-mute);margin-bottom:14px;min-height:2.6em}
+  .group .pick b{color:var(--gold-pale);font-weight:400;font-family:var(--display);font-size:17px}
+  .opts{display:grid;gap:10px}
+  .opts.four{grid-template-columns:repeat(4,1fr)}
+  .opts.three{grid-template-columns:repeat(3,1fr)}
+  .opt{position:relative;display:grid;gap:8px;justify-items:center;padding:9px 6px;border:1px solid var(--night-4);background:var(--night-2);transition:border-color .25s,transform .25s var(--ease),background .25s}
+  .opt:hover{border-color:var(--gold-deep);transform:translateY(-2px)}
+  .opt.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 12%,transparent)}
+  .opt.on::after{content:"";position:absolute;top:-1px;right:-1px;width:0;height:0;border-top:14px solid var(--gold);border-left:14px solid transparent}
+  .opt .sw{width:100%;aspect-ratio:1/1;border:1px solid rgba(0,0,0,.35);overflow:hidden}
+  .opt .sw canvas,.opt .sw svg{display:block;width:100%;height:100%}
+  .opt .nm{font-family:var(--caps);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-night-mute);text-align:center;line-height:1.3}
+  .opt.on .nm{color:var(--gold-pale)}
+  .opt .ar{font-family:var(--arabic);font-size:13px;color:var(--gold);line-height:1}
+
+  .summary{border:1px solid var(--gold-deep);background:var(--night-2);padding:20px}
+  .summary h2{font-size:25px;margin-bottom:14px}
+  .spec{display:grid;gap:0;margin-bottom:16px}
+  .spec div{display:grid;grid-template-columns:1fr auto;gap:14px;padding:11px 0;border-bottom:1px solid color-mix(in srgb,var(--gold) 18%,transparent);align-items:baseline}
+  .spec .k{font-family:var(--caps);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--on-night-mute)}
+  .spec .v{font-family:var(--display);font-size:18px;text-align:right;color:var(--gold-pale)}
+  .spec .v small{display:block;font-family:var(--body);font-size:11px;color:var(--on-night-mute)}
+  .total{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:12px 0 16px}
+  .total .lbl{font-family:var(--caps);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--on-night-mute)}
+  .total .amt{font-family:var(--display);font-size:34px;font-weight:600;color:var(--gold-pale)}
+  .total .amt small{font-family:var(--body);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-night-mute);margin-left:6px;font-weight:300}
+  .qtyrow{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:12px}
+  .qtyrow label{font-family:var(--caps);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--on-night-mute)}
+  .qty{display:inline-flex;border:1px solid var(--gold-deep);height:44px}
+  .qty button{width:42px;font-size:18px;color:var(--gold-pale)}
+  .qty input{width:62px;text-align:center;border:0;border-inline:1px solid var(--gold-deep);background:transparent;font:inherit;font-size:16px;color:inherit;-moz-appearance:textfield}
+  .qty input::-webkit-inner-spin-button,.qty input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+  .btn{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;font-family:var(--caps);font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;text-decoration:none;transition:transform .25s var(--ease)}
+  .btn::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.4) 50%,transparent 65%);transform:translateX(-130%);transition:transform .7s var(--ease)}
+  .btn:hover::after{transform:translateX(130%)}
+  .btn-solid{background:var(--gold-grad);background-size:200% auto;color:var(--night-2);box-shadow:0 10px 30px -14px rgba(201,162,77,.6)}
+  .btn-solid:hover{transform:translateY(-2px)}
+  .btn-line{border:1px solid var(--gold-deep);color:var(--gold-pale);margin-top:10px}
+  .btn-line:hover{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 10%,transparent)}
+  .summary .fine{font-size:12px;color:var(--on-night-mute);margin-top:12px;line-height:1.6}
+
+  .notes{margin-top:36px;border-top:1px solid color-mix(in srgb,var(--gold) 25%,transparent);padding-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  @media (max-width:860px){.notes{grid-template-columns:1fr}}
+  .note h3{font-family:var(--display);font-size:22px;color:var(--gold-pale);margin-bottom:6px}
+  .note p{font-size:13.5px;color:var(--on-night-mute)}
+
+  footer{padding:48px 0 max(36px,env(safe-area-inset-bottom));border-top:1px solid color-mix(in srgb,var(--gold) 28%,transparent);background:var(--night-2);margin-top:20px}
+  footer .wrap{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center}
+  footer img{width:92px}
+  footer p{font-size:12.5px;color:var(--on-night-mute);max-width:48ch}
+  footer .right{font-family:var(--caps);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--on-night-mute);text-align:right;display:grid;gap:7px}
+  footer a{text-decoration:none}
+  @media (max-width:760px){footer .wrap{grid-template-columns:1fr;justify-items:center;text-align:center}footer .right{text-align:center}}
+
+  .toast{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--night-2);color:var(--gold-pale);border:1px solid var(--gold-deep);padding:12px 20px;font-size:13px;z-index:60;opacity:0;transition:opacity .3s,transform .3s var(--ease);pointer-events:none;max-width:calc(100% - 32px);text-align:center;box-shadow:0 20px 40px -20px rgba(0,0,0,.8)}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  .nowebgl{position:absolute;inset:0;display:none;place-items:center;text-align:center;padding:32px;z-index:4;background:var(--night-2)}
+  .nowebgl p{color:var(--on-night-mute);max-width:36ch;margin-top:10px;font-size:14px}
+  .stage.failed .nowebgl{display:grid}
+
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="YLAYLA home"><span class="latin gold-text">YLAYLA</span><span class="ar">يا ليالي</span></a>
+    <nav class="links" aria-label="Sections">
+      <a href="index.html#collection">Collection</a>
+      <a href="atelier.html" class="here">Atelier</a>
+      <a href="index.html#shajarah">Your shajarah</a>
+      <a href="index.html#weavers">The weavers</a>
+    </nav>
+    <a class="back" href="index.html">← Back to the store</a>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">The sachet atelier</span>
+      <h1>Build the <span class="gold-text">Khaitha</span> sachet.</h1>
+      <p>Turn it, open the weave, change the rope. Every combination below is one the workshop can actually tie, and the price moves with your choices.</p>
+    </div>
+    <p class="ar">خيطة · اصنعيها كما تحبين</p>
+  </div>
+</section>
+
+<section class="studio">
+  <div class="wrap">
+    <div>
+      <div class="stage" id="stage">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="loading" id="loading"><div class="spin"></div><span>Threading the loom</span></div>
+        <div class="nowebgl">
+          <div>
+            <h2 style="font-family:var(--display);font-size:26px;color:var(--gold-pale)">3D view unavailable</h2>
+            <p>This browser could not start WebGL. The options on the right still work, and the atelier can send you photographs of the exact combination you pick.</p>
+          </div>
+        </div>
+        <span class="hint" id="hint">Drag to turn · scroll to zoom</span>
+      </div>
+      <div class="stagebar">
+        <button class="chip on" id="spin-toggle" type="button" aria-pressed="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg>Auto turn
+        </button>
+        <button class="chip" id="view-front" type="button">Front</button>
+        <button class="chip" id="view-detail" type="button">Rope detail</button>
+        <button class="chip" id="reset" type="button">Reset view</button>
+      </div>
+
+      <div class="notes">
+        <div class="note">
+          <h3>Woven, not printed</h3>
+          <p>Each weave is a real band from the Al Dhafra looms. The 3D preview shows the band repeat at true scale, roughly 48 mm per full motif.</p>
+        </div>
+        <div class="note">
+          <h3>The rope is the signature</h3>
+          <p>Every YLAYLA piece is tied the same way. Changing the rope changes the knot and the fall, never the gold.</p>
+        </div>
+        <div class="note">
+          <h3>Minimum 50 sachets</h3>
+          <p>Favours are made to order in one run so the weave matches across the whole table. Allow four weeks from approval.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="group">
+        <header><h2>The weave</h2><span class="step">Step one</span></header>
+        <p class="pick" id="pick-weave"></p>
+        <div class="opts four" id="opts-weave" role="group" aria-label="Sadu weave"></div>
+      </div>
+
+      <div class="group">
+        <header><h2>The rope</h2><span class="step">Step two</span></header>
+        <p class="pick" id="pick-rope"></p>
+        <div class="opts three" id="opts-rope" role="group" aria-label="Gold rope"></div>
+      </div>
+
+      <div class="group">
+        <header><h2>The stopper</h2><span class="step">Step three</span></header>
+        <p class="pick" id="pick-stopper"></p>
+        <div class="opts three" id="opts-stopper" role="group" aria-label="Rope stopper"></div>
+      </div>
+
+      <div class="summary">
+        <h2>Your sachet</h2>
+        <div class="spec">
+          <div><span class="k">Weave</span><span class="v" id="s-weave">—</span></div>
+          <div><span class="k">Rope</span><span class="v" id="s-rope">—</span></div>
+          <div><span class="k">Stopper</span><span class="v" id="s-stopper">—</span></div>
+          <div><span class="k">Reference</span><span class="v num" id="s-ref">—</span></div>
+        </div>
+        <div class="total"><span class="lbl">Per guest</span><span class="amt num" id="s-price">AED 45</span></div>
+        <div class="qtyrow">
+          <label for="qty">Guests</label>
+          <div class="qty">
+            <button type="button" data-step="-10" aria-label="Ten fewer">−</button>
+            <input id="qty" type="number" inputmode="numeric" min="50" step="10" value="50" class="num">
+            <button type="button" data-step="10" aria-label="Ten more">+</button>
+          </div>
+        </div>
+        <button class="btn btn-solid" id="add" type="button">Add to my order</button>
+        <button class="btn btn-line" id="share" type="button">Copy link to this design</button>
+        <p class="fine">Order total <b id="s-total" class="num">AED 2,250</b>. Natural henna cone, stencil card and sealant vial are included in every sachet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="logo.png" alt="" width="92" height="101" loading="lazy">
+    <p>YLAYLA, يا ليالي. Sadu gifting for weddings, Eid, National Day and the majlis. Abu Dhabi, United Arab Emirates.</p>
+    <div class="right">
+      <a href="mailto:hello@ylayla.com">hello@ylayla.com</a>
+      <a href="index.html">ylayla.com</a>
+      <span>© 2026 YLAYLA</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const AED = n => 'AED ' + n.toLocaleString('en-AE');
+  const toastEl = document.getElementById('toast'); let tt;
+  const toast = m => { toastEl.textContent = m; toastEl.classList.add('show'); clearTimeout(tt); tt = setTimeout(()=>toastEl.classList.remove('show'), 2600); };
+
+  /* ===================== catalogue ===================== */
+  const WEAVES = [
+    { id:'uwairjan', name:'Uwairjan', ar:'عويرجان', add:0,
+      blurb:'The diamond zigzag the weavers call uwairjan, on the madder ground. The classic wedding band.',
+      bands:[['#9B1B1E',10],['#110D0C',3],['#EFE3C6',3],['#C86A2A',6],['#EFE3C6',14],['teeth','#110D0C',16],['#9B1B1E',4],['diamond','#110D0C','#9B1B1E','#EFE3C6','#C86A2A',28],['#9B1B1E',4],['teethDown','#110D0C',16],['#EFE3C6',12],['#C86A2A',6],['#110D0C',3],['#9B1B1E',10]] },
+    { id:'dhurus', name:'Dhurus', ar:'ضروس', add:4,
+      blurb:'Teeth upon teeth, the dhurus border carried across the whole band in desert ochre.',
+      bands:[['#C86A2A',12],['#110D0C',4],['teeth','#C86A2A',18],['#EFE3C6',8],['teethDown','#110D0C',18],['#EFE3C6',6],['#9B1B1E',8],['teeth','#EFE3C6',18],['#110D0C',10],['teethDown','#C86A2A',18],['#110D0C',4],['#C86A2A',12]] },
+    { id:'shajarah', name:'Shajarah', ar:'شجرة', add:8,
+      blurb:'The signature band itself, the weaver’s tree on black wool. Carries the couple’s initials.',
+      bands:[['#110D0C',8],['#C9A24D',3],['#110D0C',10],['tree','#EFE3C6','#9B1B1E',46],['#110D0C',10],['#C9A24D',3],['#110D0C',8]] },
+    { id:'wadha', name:'Wadha', ar:'وضحى', add:6,
+      blurb:'Undyed white ground, wadha, with hairlines of madder and black. The quietest of the four.',
+      bands:[['#EFE3C6',16],['#9B1B1E',2],['#EFE3C6',8],['#110D0C',2],['#EFE3C6',18],['diamondFine','#EFE3C6','#9B1B1E','#110D0C',22],['#EFE3C6',18],['#110D0C',2],['#EFE3C6',8],['#9B1B1E',2],['#EFE3C6',16]] }
+  ];
+  const ROPES = [
+    { id:'mabroom', name:'Mabroom', ar:'مبروم', add:0, blurb:'A single twisted cord, the way the loom thread is spun. Two strands fall from the knot.' },
+    { id:'dafirah', name:'Dafirah', ar:'ضفيرة', add:5, blurb:'Three gold threads braided like a plait, heavier in the hand and slower to fray.' },
+    { id:'lulu',   name:'Lu’lu', ar:'لؤلؤ', add:9, blurb:'A fine cord threaded with gold pearls, a nod to the pearling boats that paid for the looms.' }
+  ];
+  const STOPPERS = [
+    { id:'kharaz', name:'Kharaz bead', ar:'خرز', add:0, blurb:'A turned walnut bead, the same wood as the mandoos lid.' },
+    { id:'shurraba', name:'Shurraba', ar:'شرابة', add:6, blurb:'A madder-red silk tassel under a gold cap. It swings when the sachet is carried.' },
+    { id:'mithkhar', name:'Mithkhar', ar:'مثخر', add:9, blurb:'A solid gold diamond charm, the mithkhar motif, engraved on the back with your shajarah number.' }
+  ];
+  const BASE = 45;
+
+  let sel = { w:0, r:0, s:0 };
+  const hash = new URLSearchParams(location.hash.slice(1));
+  const clamp = (v, n) => Math.max(0, Math.min(n-1, parseInt(v)||0));
+  if (hash.has('w')) sel.w = clamp(hash.get('w'), WEAVES.length);
+  if (hash.has('r')) sel.r = clamp(hash.get('r'), ROPES.length);
+  if (hash.has('s')) sel.s = clamp(hash.get('s'), STOPPERS.length);
+
+  /* ===================== sadu texture painting ===================== */
+  function paintSadu(spec, W, H){
+    const c = document.createElement('canvas'); c.width = W; c.height = H;
+    const x = c.getContext('2d');
+    const unit = spec.bands.reduce((a,b) => a + b[b.length-1], 0);
+    const k = H / unit;
+    let y = 0;
+    const tri = (x0, w, yTop, yBot, fill) => { x.fillStyle = fill; x.beginPath(); x.moveTo(x0, yBot); x.lineTo(x0 + w/2, yTop); x.lineTo(x0 + w, yBot); x.closePath(); x.fill(); };
+    const dia = (cx, cy, rx, ry, fill) => { x.fillStyle = fill; x.beginPath(); x.moveTo(cx, cy-ry); x.lineTo(cx+rx, cy); x.lineTo(cx, cy+ry); x.lineTo(cx-rx, cy); x.closePath(); x.fill(); };
+    for (const band of spec.bands){
+      const h = band[band.length-1] * k;
+      const kind = band[0];
+      if (kind === 'teeth' || kind === 'teethDown'){
+        x.fillStyle = band[1] === '#EFE3C6' ? '#110D0C' : '#EFE3C6'; x.fillRect(0, y, W, h);
+        const n = 8, w = W/n;
+        for (let i = 0; i < n; i++) kind === 'teeth' ? tri(i*w, w, y, y+h, band[1]) : tri(i*w, w, y+h, y, band[1]);
+      } else if (kind === 'diamond'){
+        const [, ground, big, mid, core] = band;
+        x.fillStyle = ground; x.fillRect(0, y, W, h);
+        const n = 6, w = W/n, cy = y + h/2;
+        for (let i = 0; i < n; i++){
+          const cx = i*w + w/2;
+          dia(cx, cy, w/2, h/2, big); dia(cx, cy, w/4, h/4, mid); dia(cx, cy, w/10, h/10, core);
+          dia(cx + w/2, cy, w/5, h/5, mid);
+        }
+      } else if (kind === 'diamondFine'){
+        const [, ground, a, b] = band;
+        x.fillStyle = ground; x.fillRect(0, y, W, h);
+        const n = 10, w = W/n, cy = y + h/2;
+        for (let i = 0; i < n; i++){ const cx = i*w + w/2; dia(cx, cy, w/2.4, h/2.4, a); dia(cx, cy, w/6, h/6, b); }
+      } else if (kind === 'tree'){
+        const [, thread, accent] = band;
+        x.fillStyle = '#110D0C'; x.fillRect(0, y, W, h);
+        const n = 4, w = W/n;
+        for (let i = 0; i < n; i++){
+          const cx = i*w + w/2;
+          x.strokeStyle = thread; x.lineWidth = Math.max(2, h*0.045); x.lineCap = 'square';
+          x.beginPath(); x.moveTo(cx, y + h*0.1); x.lineTo(cx, y + h*0.9); x.stroke();
+          for (let j = 0; j < 5; j++){
+            const yy = y + h*(0.18 + j*0.16), sp = w*(0.34 - j*0.04);
+            x.beginPath(); x.moveTo(cx - sp, yy + h*0.08); x.lineTo(cx, yy); x.lineTo(cx + sp, yy + h*0.08); x.stroke();
+          }
+          dia(cx, y + h*0.5, w*0.17, h*0.17, accent);
+          dia(cx + w/2, y + h*0.5, w*0.1, h*0.12, thread);
+        }
+      } else {
+        x.fillStyle = kind; x.fillRect(0, y, W, h);
+      }
+      y += h;
+    }
+    // woven grain: vertical warp lines and a touch of noise
+    x.globalAlpha = .12;
+    for (let i = 0; i < W; i += 3){ x.fillStyle = i % 6 ? '#000' : '#fff'; x.fillRect(i, 0, 1.4, H); }
+    x.globalAlpha = .07;
+    for (let i = 0; i < H; i += 4){ x.fillStyle = '#000'; x.fillRect(0, i, W, 1.2); }
+    x.globalAlpha = 1;
+    return c;
+  }
+  const weaveCanvas = WEAVES.map(w => paintSadu(w, 512, 512));
+
+  /* ===================== swatch icons for ropes & stoppers ===================== */
+  const ropeIcon = id => {
+    if (id === 'mabroom') return `<svg viewBox="0 0 48 48"><rect width="48" height="48" fill="#2C2819"/><path d="M24 4 V44" stroke="url(#gg)" stroke-width="7" stroke-linecap="round"/><path d="M24 4 V44" stroke="#6E5420" stroke-width="7" stroke-dasharray="3 6" stroke-linecap="round" opacity=".7"/><defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#8A6A2B"/><stop offset=".5" stop-color="#F0DA8E"/><stop offset="1" stop-color="#8A6A2B"/></linearGradient></defs></svg>`;
+    if (id === 'dafirah') return `<svg viewBox="0 0 48 48"><rect width="48" height="48" fill="#2C2819"/><g fill="none" stroke="url(#gg2)" stroke-width="3.4" stroke-linecap="round"><path d="M18 4 C30 12 18 20 30 28 C18 36 30 40 24 44"/><path d="M30 4 C18 12 30 20 18 28 C30 36 18 40 24 44"/><path d="M24 4 V44" opacity=".55"/></g><defs><linearGradient id="gg2" x1="0" x2="1"><stop offset="0" stop-color="#8A6A2B"/><stop offset=".5" stop-color="#F0DA8E"/><stop offset="1" stop-color="#8A6A2B"/></linearGradient></defs></svg>`;
+    return `<svg viewBox="0 0 48 48"><rect width="48" height="48" fill="#2C2819"/><path d="M24 4 V44" stroke="#8A6A2B" stroke-width="2.4"/><g fill="url(#gg3)">${[8,15,22,29,36,43].map(y=>`<circle cx="24" cy="${y}" r="4.4"/>`).join('')}</g><defs><radialGradient id="gg3" cx=".35" cy=".3"><stop offset="0" stop-color="#FFF3C4"/><stop offset="1" stop-color="#9A7730"/></radialGradient></defs></svg>`;
+  };
+  const stopIcon = id => {
+    if (id === 'kharaz') return `<svg viewBox="0 0 48 48"><rect width="48" height="48" fill="#2C2819"/><path d="M24 2 V14" stroke="#C9A24D" stroke-width="2.4"/><ellipse cx="24" cy="29" rx="12" ry="14" fill="url(#wd)"/><ellipse cx="20" cy="24" rx="4" ry="6" fill="#7A4C33" opacity=".5"/><defs><linearGradient id="wd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6A4331"/><stop offset="1" stop-color="#2B1912"/></linearGradient></defs></svg>`;
+    if (id === 'shurraba') return `<svg viewBox="0 0 48 48"><rect width="48" height="48" fill="#2C2819"/><path d="M24 2 V10" stroke="#C9A24D" stroke-width="2.4"/><path d="M17 10 h14 l-2 7 h-10 Z" fill="url(#gg4)"/><g stroke="#9B1B1E" stroke-width="2.2" stroke-linecap="round">${[-8,-5,-2,1,4,7].map(o=>`<path d="M${24+o} 17 L${24+o*1.5} 42"/>`).join('')}</g><defs><linearGradient id="gg4" x1="0" x2="1"><stop offset="0" stop-color="#8A6A2B"/><stop offset=".5" stop-color="#F0DA8E"/><stop offset="1" stop-color="#8A6A2B"/></linearGradient></defs></svg>`;
+    return `<svg viewBox="0 0 48 48"><rect width="48" height="48" fill="#2C2819"/><path d="M24 2 V10" stroke="#C9A24D" stroke-width="2.4"/><circle cx="24" cy="13" r="3.4" fill="none" stroke="#F0DA8E" stroke-width="2"/><path d="M24 18 L37 30 L24 44 L11 30 Z" fill="url(#gg5)"/><path d="M24 25 L31 30 L24 37 L17 30 Z" fill="#2C2819" opacity=".45"/><defs><linearGradient id="gg5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8A6A2B"/><stop offset=".45" stop-color="#FFF3C4"/><stop offset="1" stop-color="#8A6A2B"/></linearGradient></defs></svg>`;
+  };
+
+  /* ===================== option buttons ===================== */
+  function buildOpts(containerId, list, key, icon){
+    const host = document.getElementById(containerId);
+    host.innerHTML = list.map((o, i) => `
+      <button class="opt" type="button" data-i="${i}" aria-pressed="false" title="${o.name}">
+        <span class="sw" data-sw="${key}${i}">${icon ? icon(o.id) : ''}</span>
+        <span class="ar">${o.ar}</span>
+        <span class="nm">${o.name}</span>
+      </button>`).join('');
+    if (!icon) list.forEach((o, i) => {
+      const slot = host.querySelector(`[data-sw="${key}${i}"]`);
+      const c = weaveCanvas[i].cloneNode(); c.getContext('2d').drawImage(weaveCanvas[i], 0, 0);
+      c.style.width = '100%'; c.style.height = '100%'; slot.appendChild(c);
+    });
+    host.addEventListener('click', e => {
+      const b = e.target.closest('.opt'); if (!b) return;
+      sel[key] = parseInt(b.dataset.i); apply(true);
+    });
+  }
+  buildOpts('opts-weave', WEAVES, 'w', null);
+  buildOpts('opts-rope', ROPES, 'r', ropeIcon);
+  buildOpts('opts-stopper', STOPPERS, 's', stopIcon);
+
+  /* ===================== three.js scene ===================== */
+  const stage = document.getElementById('stage');
+  const loading = document.getElementById('loading');
+  let renderer, scene, camera, root, fabricMesh, ropeGroup, env, raf;
+  let yaw = 0.5, pitch = 0.08, dist = 4.3, targetYaw = 0.5, targetPitch = 0.08, targetDist = 4.3;
+  let spin = !reduce, dragging = false, lastX = 0, lastY = 0, pinch = 0;
+  const texCache = new Map();
+
+  function makeEnv(){
+    const c = document.createElement('canvas'); c.width = 512; c.height = 256;
+    const x = c.getContext('2d');
+    const g = x.createLinearGradient(0, 0, 0, 256);
+    g.addColorStop(0, '#FFF6DC'); g.addColorStop(.38, '#C9A24D'); g.addColorStop(.52, '#5B5236'); g.addColorStop(1, '#17150C');
+    x.fillStyle = g; x.fillRect(0, 0, 512, 256);
+    x.fillStyle = 'rgba(255,255,255,.85)'; x.beginPath(); x.ellipse(140, 70, 70, 34, 0, 0, Math.PI*2); x.fill();
+    x.fillStyle = 'rgba(255,230,170,.5)'; x.beginPath(); x.ellipse(380, 100, 90, 40, 0, 0, Math.PI*2); x.fill();
+    const t = new THREE.CanvasTexture(c); t.mapping = THREE.EquirectangularReflectionMapping; t.encoding = THREE.sRGBEncoding;
+    const pmrem = new THREE.PMREMGenerator(renderer); pmrem.compileEquirectangularShader();
+    const out = pmrem.fromEquirectangular(t).texture; pmrem.dispose(); t.dispose();
+    return out;
+  }
+
+  function fabricTexture(i){
+    if (texCache.has(i)) return texCache.get(i);
+    const t = new THREE.CanvasTexture(weaveCanvas[i]);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(3, 1.6); t.anisotropy = 8; t.encoding = THREE.sRGBEncoding;
+    const b = new THREE.CanvasTexture(weaveCanvas[i]);
+    b.wrapS = b.wrapT = THREE.RepeatWrapping; b.repeat.set(3, 1.6);
+    const pair = { map:t, bump:b }; texCache.set(i, pair); return pair;
+  }
+
+  const goldMat = () => new THREE.MeshStandardMaterial({ color:0xD9B05E, metalness:1, roughness:.22, envMap:env, envMapIntensity:1.25 });
+  const goldDark = () => new THREE.MeshStandardMaterial({ color:0xA07E34, metalness:1, roughness:.34, envMap:env, envMapIntensity:1.05 });
+  const woodMat = () => new THREE.MeshStandardMaterial({ color:0x5A3827, metalness:.05, roughness:.55, envMap:env, envMapIntensity:.5 });
+  const silkMat = () => new THREE.MeshStandardMaterial({ color:0x8E1A1D, metalness:.05, roughness:.65, envMap:env, envMapIntensity:.35 });
+
+  function buildPouch(){
+    const pts = [];
+    const profile = [
+      [0.02,0.00],[0.24,0.015],[0.44,0.06],[0.60,0.17],[0.70,0.34],[0.745,0.56],[0.75,0.78],
+      [0.715,0.98],[0.64,1.14],[0.54,1.27],[0.43,1.38],[0.335,1.47],[0.272,1.545],
+      [0.268,1.60],[0.315,1.68],[0.40,1.80],[0.475,1.93],[0.50,2.00]
+    ];
+    for (const [r, y] of profile) pts.push(new THREE.Vector2(r, y));
+    const geo = new THREE.LatheGeometry(pts, 128);
+    geo.computeVertexNormals();
+    const { map, bump } = fabricTexture(sel.w);
+    const mat = new THREE.MeshStandardMaterial({ map, bumpMap:bump, bumpScale:.012, roughness:.92, metalness:0, side:THREE.DoubleSide, envMap:env, envMapIntensity:.35 });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.castShadow = true;
+    // gentle gather: squeeze the pouch slightly so it reads as cloth, not a vase
+    const pos = geo.attributes.position;
+    for (let i = 0; i < pos.count; i++){
+      const vx = pos.getX(i), vy = pos.getY(i), vz = pos.getZ(i);
+      const a = Math.atan2(vz, vx), r = Math.hypot(vx, vz);
+      // cloth gathers: faint low down, strong where the rope cinches, loose again in the collar
+      const gather = Math.max(0, Math.min(1, (vy - 0.40) / 1.05));
+      let pleat = 1 + Math.sin(a * 12) * 0.045 * gather * gather;
+      if (vy > 1.62) pleat += Math.sin(a * 7 + 0.6) * 0.085 * Math.min(1, (vy - 1.62) / 0.34);
+      const sag = vy < 0.55 ? 1 + (0.55 - vy) * 0.07 : 1;
+      const lean = Math.sin(a * 3) * 0.012 * gather;
+      pos.setX(i, Math.cos(a) * r * (pleat + lean) * sag);
+      pos.setZ(i, Math.sin(a) * r * (pleat + lean) * sag);
+      if (vy > 1.72) pos.setY(i, vy + Math.sin(a * 7 + 0.6) * 0.05 * Math.min(1, (vy - 1.72) / 0.28));
+    }
+    pos.needsUpdate = true; geo.computeVertexNormals();
+    return mesh;
+  }
+
+  function tube(curve, radius, segs, mat, radial){
+    return new THREE.Mesh(new THREE.TubeGeometry(curve, segs, radius, radial || 10, false), mat);
+  }
+
+  function strandCurve(sign){
+    // from the knot at the neck, out and down to where the stopper hangs
+    return new THREE.CatmullRomCurve3([
+      new THREE.Vector3(0.26 * sign, 1.55, 0.09 * sign),
+      new THREE.Vector3(0.56 * sign, 1.42, 0.22 * sign),
+      new THREE.Vector3(0.82 * sign, 1.14, 0.26 * sign),
+      new THREE.Vector3(0.94 * sign, 0.82, 0.18 * sign),
+      new THREE.Vector3(0.93 * sign, 0.52, 0.09 * sign)
+    ]);
+  }
+
+  function buildStopper(kind){
+    const g = new THREE.Group();
+    if (kind === 'kharaz'){
+      const bead = new THREE.Mesh(new THREE.SphereGeometry(0.105, 32, 24), woodMat());
+      bead.scale.set(1, 1.25, 1); bead.position.y = -0.10; g.add(bead);
+      const cap = new THREE.Mesh(new THREE.TorusGeometry(0.055, 0.016, 10, 24), goldMat());
+      cap.rotation.x = Math.PI/2; cap.position.y = 0.015; g.add(cap);
+      const tail = new THREE.Mesh(new THREE.ConeGeometry(0.035, 0.09, 16), goldDark());
+      tail.position.y = -0.24; tail.rotation.x = Math.PI; g.add(tail);
+    } else if (kind === 'shurraba'){
+      const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.085, 0.11, 24), goldMat());
+      cap.position.y = -0.04; g.add(cap);
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(0.052, 0.013, 10, 24), goldMat());
+      ring.rotation.x = Math.PI/2; ring.position.y = 0.025; g.add(ring);
+      const silk = silkMat();
+      for (let i = 0; i < 14; i++){
+        const a = (i / 14) * Math.PI * 2, r = 0.052 + (i % 2) * 0.012;
+        const len = 0.26 + (i % 3) * 0.035;
+        const th = new THREE.Mesh(new THREE.CylinderGeometry(0.0075, 0.005, len, 6), silk);
+        th.position.set(Math.cos(a) * r, -0.10 - len/2, Math.sin(a) * r);
+        th.rotation.z = Math.cos(a) * 0.14; th.rotation.x = -Math.sin(a) * 0.14;
+        g.add(th);
+      }
+    } else {
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(0.045, 0.012, 10, 24), goldMat());
+      ring.position.y = -0.01; g.add(ring);
+      const charm = new THREE.Mesh(new THREE.OctahedronGeometry(0.125, 0), goldMat());
+      charm.scale.set(0.82, 1.18, 0.34); charm.position.y = -0.17; g.add(charm);
+      const inner = new THREE.Mesh(new THREE.OctahedronGeometry(0.062, 0), goldDark());
+      inner.scale.set(0.82, 1.18, 0.5); inner.position.y = -0.17; inner.position.z = 0.03; g.add(inner);
+    }
+    return g;
+  }
+
+  function buildRope(){
+    const g = new THREE.Group();
+    const style = ROPES[sel.r].id;
+    const gold = goldMat(), dark = goldDark();
+
+    // the knot around the neck
+    const tubeR = style === 'dafirah' ? 0.05 : style === 'lulu' ? 0.03 : 0.04;
+    const neck = new THREE.Mesh(new THREE.TorusGeometry(0.30, tubeR, 16, 72), gold);
+    neck.rotation.x = Math.PI/2; neck.position.y = 1.555; g.add(neck);
+    const neck2 = new THREE.Mesh(new THREE.TorusGeometry(0.305, tubeR * 0.78, 14, 72), dark);
+    neck2.rotation.x = Math.PI/2; neck2.position.y = 1.615; g.add(neck2);
+    if (style === 'lulu'){
+      for (let i = 0; i < 16; i++){
+        const a = (i/16) * Math.PI * 2;
+        const b = new THREE.Mesh(new THREE.SphereGeometry(0.044, 18, 14), gold);
+        b.position.set(Math.cos(a) * 0.30, 1.555, Math.sin(a) * 0.30); g.add(b);
+      }
+    }
+    const knot = new THREE.Mesh(new THREE.SphereGeometry(style === 'dafirah' ? 0.095 : 0.078, 22, 18), dark);
+    knot.position.set(0.30, 1.575, 0.07); knot.scale.set(1, .82, .82); g.add(knot);
+
+    for (const sign of [1, -1]){
+      const curve = strandCurve(sign);
+      if (style === 'mabroom'){
+        g.add(tube(curve, 0.036, 80, gold, 12));
+        const twist = tube(curve, 0.037, 80, dark, 12);
+        twist.material = new THREE.MeshStandardMaterial({ color:0x8A6A2B, metalness:1, roughness:.4, envMap:env, envMapIntensity:.9, transparent:true, opacity:.55, wireframe:true });
+        g.add(twist);
+      } else if (style === 'dafirah'){
+        for (let k = 0; k < 3; k++){
+          const pts = [];
+          for (let i = 0; i <= 60; i++){
+            const t = i / 60, p = curve.getPoint(t);
+            const tan = curve.getTangent(t);
+            const up = new THREE.Vector3(0, 1, 0);
+            const n1 = new THREE.Vector3().crossVectors(tan, up).normalize();
+            const n2 = new THREE.Vector3().crossVectors(tan, n1).normalize();
+            const a = t * Math.PI * 8 + (k * Math.PI * 2) / 3, r = 0.036;
+            pts.push(p.clone().addScaledVector(n1, Math.cos(a) * r).addScaledVector(n2, Math.sin(a) * r));
+          }
+          g.add(tube(new THREE.CatmullRomCurve3(pts), 0.024, 80, k === 1 ? dark : gold, 10));
+        }
+      } else {
+        g.add(tube(curve, 0.015, 70, dark, 8));
+        for (let i = 1; i <= 8; i++){
+          const p = curve.getPoint(i / 9);
+          const bead = new THREE.Mesh(new THREE.SphereGeometry(0.052, 20, 16), gold);
+          bead.position.copy(p); g.add(bead);
+        }
+      }
+      const stop = buildStopper(STOPPERS[sel.s].id);
+      stop.position.copy(curve.getPoint(1));
+      stop.rotation.z = -sign * 0.12;
+      stop.scale.setScalar(1.3);
+      g.add(stop);
+    }
+    return g;
+  }
+
+  function shadowPlane(){
+    const c = document.createElement('canvas'); c.width = c.height = 256;
+    const x = c.getContext('2d');
+    const g = x.createRadialGradient(128, 128, 6, 128, 128, 124);
+    g.addColorStop(0, 'rgba(0,0,0,.6)'); g.addColorStop(.45, 'rgba(0,0,0,.26)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 256, 256);
+    const t = new THREE.CanvasTexture(c);
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(3.4, 3.4), new THREE.MeshBasicMaterial({ map:t, transparent:true, depthWrite:false }));
+    m.rotation.x = -Math.PI/2; m.position.y = 0.002; m.scale.set(1, .72, 1);
+    return m;
+  }
+
+  function disposeTree(obj){
+    obj.traverse(o => {
+      if (o.geometry) o.geometry.dispose();
+      if (o.material){ const ms = Array.isArray(o.material) ? o.material : [o.material]; ms.forEach(m => m.dispose()); }
+    });
+  }
+
+  function init(){
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias:true, alpha:false, powerPreference:'high-performance' });
+    } catch(e){ stage.classList.add('failed'); loading.classList.add('gone'); return false; }
+    if (!renderer || !renderer.getContext()){ stage.classList.add('failed'); loading.classList.add('gone'); return false; }
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
+    stage.appendChild(renderer.domElement);
+
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+    env = makeEnv();
+
+    scene.add(new THREE.HemisphereLight(0xFFE9B8, 0x2A2616, .55));
+    const key = new THREE.DirectionalLight(0xFFF1CF, 2.1); key.position.set(2.6, 4.2, 3.2); scene.add(key);
+    const rim = new THREE.DirectionalLight(0xC9A24D, 1.5); rim.position.set(-3.2, 2.0, -2.6); scene.add(rim);
+    const fill = new THREE.DirectionalLight(0xB8AB86, .5); fill.position.set(-1.4, .6, 3.4); scene.add(fill);
+
+    root = new THREE.Group(); root.position.y = -0.95; scene.add(root);
+    root.add(shadowPlane());
+    rebuild();
+    resize();
+    addEventListener('resize', resize, { passive:true });
+    loop();
+    setTimeout(() => loading.classList.add('gone'), 260);
+    return true;
+  }
+
+  function rebuild(){
+    if (fabricMesh){ root.remove(fabricMesh); disposeTree(fabricMesh); }
+    if (ropeGroup){ root.remove(ropeGroup); disposeTree(ropeGroup); }
+    fabricMesh = buildPouch(); root.add(fabricMesh);
+    ropeGroup = buildRope(); root.add(ropeGroup);
+  }
+
+  function resize(){
+    const r = stage.getBoundingClientRect();
+    if (!r.width) return;
+    renderer.setSize(r.width, r.height, false);
+    camera.aspect = r.width / r.height; camera.updateProjectionMatrix();
+  }
+
+  function loop(){
+    raf = requestAnimationFrame(loop);
+    if (spin && !dragging) targetYaw += 0.0035;
+    yaw += (targetYaw - yaw) * 0.09;
+    pitch += (targetPitch - pitch) * 0.09;
+    dist += (targetDist - dist) * 0.08;
+    camera.position.set(Math.sin(yaw) * dist, 0.55 + pitch * dist, Math.cos(yaw) * dist);
+    camera.lookAt(0, 0.05, 0);
+    renderer.render(scene, camera);
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (!renderer) return;
+    if (document.hidden) cancelAnimationFrame(raf); else loop();
+  });
+
+  /* ---------- pointer control ---------- */
+  const hintEl = document.getElementById('hint');
+  let hintTimer = setTimeout(() => hintEl.classList.add('gone'), 5200);
+  function hideHint(){ hintEl.classList.add('gone'); clearTimeout(hintTimer); }
+  stage.addEventListener('pointerdown', e => {
+    if (!renderer) return;
+    dragging = true; stage.classList.add('dragging'); lastX = e.clientX; lastY = e.clientY;
+    stage.setPointerCapture(e.pointerId); hideHint();
+  });
+  stage.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    targetYaw -= (e.clientX - lastX) * 0.0085;
+    targetPitch = Math.max(-0.42, Math.min(0.55, targetPitch - (e.clientY - lastY) * 0.0035));
+    lastX = e.clientX; lastY = e.clientY;
+  });
+  const endDrag = e => { dragging = false; stage.classList.remove('dragging'); if (e && e.pointerId != null && stage.hasPointerCapture && stage.hasPointerCapture(e.pointerId)) stage.releasePointerCapture(e.pointerId); };
+  stage.addEventListener('pointerup', endDrag);
+  stage.addEventListener('pointercancel', endDrag);
+  stage.addEventListener('wheel', e => {
+    if (!renderer) return;
+    e.preventDefault(); hideHint();
+    targetDist = Math.max(2.6, Math.min(7, targetDist + Math.sign(e.deltaY) * 0.32));
+  }, { passive:false });
+  stage.addEventListener('touchmove', e => {
+    if (e.touches.length !== 2) return;
+    e.preventDefault();
+    const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    if (pinch) targetDist = Math.max(2.6, Math.min(7, targetDist - (d - pinch) * 0.012));
+    pinch = d;
+  }, { passive:false });
+  stage.addEventListener('touchend', () => { pinch = 0; });
+
+  const spinBtn = document.getElementById('spin-toggle');
+  spinBtn.addEventListener('click', () => {
+    spin = !spin; spinBtn.classList.toggle('on', spin); spinBtn.setAttribute('aria-pressed', spin);
+  });
+  if (reduce){ spin = false; spinBtn.classList.remove('on'); spinBtn.setAttribute('aria-pressed','false'); }
+  document.getElementById('view-front').addEventListener('click', () => { targetYaw = 0; targetPitch = 0.05; targetDist = 4.3; spin = false; spinBtn.classList.remove('on'); });
+  document.getElementById('view-detail').addEventListener('click', () => { targetYaw = 0.75; targetPitch = 0.42; targetDist = 2.9; spin = false; spinBtn.classList.remove('on'); });
+  document.getElementById('reset').addEventListener('click', () => { targetYaw = 0.5; targetPitch = 0.08; targetDist = 4.3; });
+
+  /* ===================== state wiring ===================== */
+  const qty = document.getElementById('qty');
+  const refOf = () => 'KH-' + (sel.w+1) + (sel.r+1) + (sel.s+1) + '-' + String((sel.w*37 + sel.r*11 + sel.s*7 + 104) % 900 + 100);
+  const unitPrice = () => BASE + WEAVES[sel.w].add + ROPES[sel.r].add + STOPPERS[sel.s].add;
+
+  function apply(rebuild3d){
+    [['opts-weave','w'],['opts-rope','r'],['opts-stopper','s']].forEach(([id, key]) => {
+      document.querySelectorAll('#' + id + ' .opt').forEach((b, i) => {
+        const on = i === sel[key]; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+      });
+    });
+    const w = WEAVES[sel.w], r = ROPES[sel.r], s = STOPPERS[sel.s];
+    document.getElementById('pick-weave').innerHTML = `<b>${w.name}</b> — ${w.blurb}`;
+    document.getElementById('pick-rope').innerHTML = `<b>${r.name}</b> — ${r.blurb}`;
+    document.getElementById('pick-stopper').innerHTML = `<b>${s.name}</b> — ${s.blurb}`;
+    document.getElementById('s-weave').innerHTML = `${w.name}<small>${w.add ? '+ ' + AED(w.add) : 'included'}</small>`;
+    document.getElementById('s-rope').innerHTML = `${r.name}<small>${r.add ? '+ ' + AED(r.add) : 'included'}</small>`;
+    document.getElementById('s-stopper').innerHTML = `${s.name}<small>${s.add ? '+ ' + AED(s.add) : 'included'}</small>`;
+    document.getElementById('s-ref').textContent = refOf();
+    document.getElementById('s-price').textContent = AED(unitPrice());
+    const q = Math.max(50, parseInt(qty.value) || 50);
+    document.getElementById('s-total').textContent = AED(unitPrice() * q);
+    history.replaceState(null, '', `#w=${sel.w}&r=${sel.r}&s=${sel.s}`);
+    if (rebuild3d && renderer) rebuild();
+  }
+
+  document.querySelector('.qtyrow').addEventListener('click', e => {
+    const b = e.target.closest('[data-step]'); if (!b) return;
+    qty.value = Math.max(50, (parseInt(qty.value) || 50) + parseInt(b.dataset.step)); apply(false);
+  });
+  qty.addEventListener('input', () => apply(false));
+  qty.addEventListener('blur', () => { if ((parseInt(qty.value) || 0) < 50){ qty.value = 50; apply(false); toast('Favours are made in runs of fifty or more'); } });
+
+  document.getElementById('add').addEventListener('click', () => {
+    const q = Math.max(50, parseInt(qty.value) || 50);
+    let cart = {};
+    try { cart = JSON.parse(localStorage.getItem('ylayla-cart')) || {}; } catch(e){}
+    cart.sachet = (cart.sachet || 0) + q;
+    const cfg = { weave:WEAVES[sel.w].name, rope:ROPES[sel.r].name, stopper:STOPPERS[sel.s].name, ref:refOf(), price:unitPrice() };
+    try { localStorage.setItem('ylayla-cart', JSON.stringify(cart)); localStorage.setItem('ylayla-sachet-config', JSON.stringify(cfg)); } catch(e){}
+    toast(`${q} sachets, ${cfg.ref}, added. Open your order on the store page.`);
+  });
+
+  document.getElementById('share').addEventListener('click', async () => {
+    const url = location.origin + location.pathname + `#w=${sel.w}&r=${sel.r}&s=${sel.s}`;
+    try { await navigator.clipboard.writeText(url); toast('Link copied. It opens on this exact sachet.'); }
+    catch(e){ toast(url); }
+  });
+
+  apply(false);
+  init();
+})();
+</script>
+</body>
+</html>
