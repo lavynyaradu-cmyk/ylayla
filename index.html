@@ -145,7 +145,8 @@
   .product .art{aspect-ratio:1/1;display:grid;place-items:center;background:radial-gradient(120% 90% at 50% 20%,var(--paper),var(--sand) 55%,var(--sand-2));position:relative;overflow:hidden}
   .product .art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(44,40,25,.18));pointer-events:none}
   .product .art svg{width:70%;height:70%;overflow:visible;transform:translateZ(30px);transition:transform .5s var(--ease)}
-  .product:hover .art svg{transform:translateZ(50px) scale(1.04)}
+  .product .art img{width:100%;height:100%;object-fit:cover;transform:translateZ(30px);transition:transform .5s var(--ease)}
+  .product:hover .art svg,.product:hover .art img{transform:translateZ(50px) scale(1.04)}
   .tag{position:absolute;top:14px;left:14px;font-family:var(--caps);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;padding:7px 10px;background:var(--night-2);color:var(--gold-pale);z-index:2}
   .tag.red{background:var(--madder);color:#fff}
   .product .rule{height:8px;background:var(--night-2);position:relative}
@@ -162,6 +163,20 @@
   .customise span{transition:transform .3s var(--ease)}
   .customise:hover{background:color-mix(in srgb,var(--gold) 12%,transparent);border-color:var(--gold)}
   .customise:hover span{transform:translateX(4px)}
+  /* ---------- mandoos photographs ---------- */
+  .studio{padding:0 0 96px}
+  .shots{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .shots .set{grid-column:1 / -1}
+  .shots figure{margin:0;position:relative;overflow:hidden;background:var(--night-2);border:1px solid color-mix(in srgb,var(--gold) 28%,transparent);aspect-ratio:1}
+  .shots .set{aspect-ratio:4/3}
+  .shots img{width:100%;height:100%;object-fit:cover;display:block}
+  .shots figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 16px 14px;background:linear-gradient(transparent,rgba(17,13,12,.78));font-family:var(--caps);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-pale)}
+  .shots.three{grid-template-columns:repeat(3,1fr)}
+  .shots.three figure{aspect-ratio:4/3}
+  .studio .more{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-family:var(--caps);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-pale);text-decoration:none;border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);padding:13px 20px}
+  .studio .more:hover{background:color-mix(in srgb,var(--gold) 14%,transparent)}
+  @media (max-width:800px){.shots{grid-template-columns:1fr 1fr}.shots.three{grid-template-columns:1fr}.studio{padding-bottom:64px}}
+
   .buy{margin-top:auto;padding-top:16px;border-top:1px solid color-mix(in srgb,var(--gold) 25%,transparent);display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
   .price{font-family:var(--display);font-size:26px;font-weight:600;color:var(--gold-pale)}
   .price small{font-family:var(--caps);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--on-night-mute);margin-left:6px;font-weight:400}
@@ -320,7 +335,8 @@
     <a class="brand" href="#top" aria-label="YLAYLA home"><span class="latin gold-text">YLAYLA</span><span class="ar">يا ليالي</span></a>
     <nav class="links" aria-label="Sections">
       <a href="#collection">Collection</a>
-      <a href="atelier.html">Atelier</a>
+      <a href="#mandoos">Mandoos</a>
+      <a href="#sachets">Sachets</a>
       <a href="#shajarah">Your shajarah</a>
       <a href="#weavers">The weavers</a>
       <a href="#occasions">Occasions</a>
@@ -335,7 +351,8 @@
 <div class="menu" id="menu" aria-hidden="true">
   <nav>
     <a href="#collection">Collection</a>
-    <a href="atelier.html">Atelier</a>
+    <a href="#mandoos">Mandoos</a>
+    <a href="#sachets">Sachets</a>
     <a href="#shajarah">Your shajarah</a>
     <a href="#weavers">The weavers</a>
     <a href="#occasions">Occasions</a>
@@ -365,6 +382,46 @@
           <a class="btn btn-line" href="#shajarah">Build your shajarah</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="studio" id="mandoos">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow">The mandoos</span>
+          <h2>Walnut and pale wood, <span class="gold-text">one saffron vial.</span></h2>
+        </div>
+        <p>The dowry chest, photographed. Open on marble, stacked for the table, and closed for the gift.</p>
+      </div>
+      <div class="shots">
+        <figure class="set reveal"><img src="images/mandoos-set.jpg" alt="Walnut and pale wood mandoos boxes open together on dark marble"><figcaption>Both finishes</figcaption></figure>
+        <figure class="reveal d1"><img src="images/mandoos-walnut.jpg" alt="Open walnut mandoos with a saffron vial on Sadu cloth"><figcaption>Walnut</figcaption></figure>
+        <figure class="reveal d2"><img src="images/mandoos-pale.jpg" alt="Open pale wood mandoos with a saffron vial on Sadu cloth"><figcaption>Pale wood</figcaption></figure>
+        <figure class="reveal d3"><img src="images/mandoos-1320.jpg" alt="Open walnut mandoos sitting on two closed pale wood boxes"><figcaption>On the pale boxes</figcaption></figure>
+        <figure class="reveal"><img src="images/mandoos-1345.jpg" alt="Three closed mandoos boxes, two pale wood and one walnut, on dark marble"><figcaption>Closed</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="studio" id="sachets">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow">The sachets</span>
+          <h2>Three weaves, <span class="gold-text">your button.</span></h2>
+        </div>
+        <p>Hand-woven Sadu pouches on a twisted cord. Choose the cloth, the cord, the stoppers and the button, and see it photographed before you order.</p>
+      </div>
+      <div class="shots three">
+        <figure class="reveal"><img src="images/sachet-01.jpg" alt="Red Sadu sachet with a black diamond medallion and gold cord on dark marble" loading="lazy"><figcaption>Red medallion</figcaption></figure>
+        <figure class="reveal d1"><img src="images/sachet-light.jpg" alt="Light Sadu sachet with vertical red, orange and ivory stripes and gold cord" loading="lazy"><figcaption>Light Sadu</figcaption></figure>
+        <figure class="reveal d2"><img src="images/sachet-redblack.jpg" alt="Red and black Sadu sachet with a black diamond band and gold cord" loading="lazy"><figcaption>Red &amp; black Sadu</figcaption></figure>
+        <figure class="reveal"><img src="images/sachet-01-gold-flower.jpg" alt="Red medallion sachet with a gold crystal flower button" loading="lazy"><figcaption>Gold crystal flower</figcaption></figure>
+        <figure class="reveal d1"><img src="images/sachet-light-gold-bow.jpg" alt="Light Sadu sachet with a polished gold bow" loading="lazy"><figcaption>Gold bow</figcaption></figure>
+        <figure class="reveal d2"><img src="images/sachet-redblack-silver-flower.jpg" alt="Red and black Sadu sachet with a silver crystal flower button" loading="lazy"><figcaption>Silver crystal flower</figcaption></figure>
+      </div>
+      <a class="more reveal" href="sachets/builder/">Build your sachet <span>→</span></a>
     </div>
   </section>
 
@@ -545,18 +602,7 @@
 
   // ---------- product illustrations ----------
   const art = {
-    sachet: `
-      <svg viewBox="0 0 220 260" role="img" aria-label="Sadu henna sachet with gold rope">
-        <ellipse cx="110" cy="248" rx="70" ry="8" fill="rgba(44,40,25,.16)"/>
-        <path d="M46 70 C40 120 36 180 50 232 Q110 252 170 232 C184 180 180 120 174 70 Z" fill="url(#sadu)" stroke="#110D0C" stroke-width="1.5"/>
-        <path d="M46 70 Q110 92 174 70 L172 60 Q110 80 48 60 Z" fill="#110D0C"/>
-        <path d="M52 62 Q110 84 168 62" fill="none" stroke="url(#gold-g)" stroke-width="7" stroke-linecap="round"/>
-        <path d="M52 62 Q110 84 168 62" fill="none" stroke="#8A6A2B" stroke-width="7" stroke-dasharray="3 5" stroke-linecap="round" opacity=".6"/>
-        <path d="M150 66 q10 14 2 38 M154 66 q16 12 12 40" fill="none" stroke="url(#gold-g)" stroke-width="3.5" stroke-linecap="round"/>
-        <path d="M152 104 l-6 12 M166 106 l-4 12" stroke="#8A6A2B" stroke-width="3" stroke-linecap="round"/>
-        <path d="M78 34 C78 20 100 12 118 14 C138 16 148 34 140 48 L128 66 Q110 72 92 66 Z" fill="#FBF7EF" stroke="#110D0C" stroke-width="1.5"/>
-        <path d="M84 40 q26 -14 50 2" fill="none" stroke="#9B1B1E" stroke-width="1.5"/>
-      </svg>`,
+    sachet: `<img src="images/sachet-01-gold-flower.jpg" alt="Red Sadu sachet with a gold crystal flower button and gold cord on dark marble">`,
     soap: `
       <svg viewBox="0 0 220 260" role="img" aria-label="Soap block with Sadu ribbon">
         <ellipse cx="110" cy="220" rx="86" ry="10" fill="rgba(44,40,25,.16)"/>
@@ -570,29 +616,7 @@
         <circle cx="108" cy="58" r="6" fill="none" stroke="url(#gold-g)" stroke-width="3"/>
         <text x="140" y="172" font-family="Cinzel,serif" font-size="10" letter-spacing="2" fill="#6F6446" transform="rotate(12 140 172)">YLAYLA</text>
       </svg>`,
-    mandoos: `
-      <svg viewBox="0 0 220 260" role="img" aria-label="Walnut box with Sadu interior and saffron vial">
-        <ellipse cx="110" cy="236" rx="92" ry="9" fill="rgba(44,40,25,.18)"/>
-        <path d="M26 132 L112 106 L196 130 L196 206 L112 232 L26 206 Z" fill="url(#walnut)"/>
-        <path d="M26 132 L112 158 L196 130 L112 106 Z" fill="url(#sadu)"/>
-        <path d="M26 132 L112 158 L196 130" fill="none" stroke="#110D0C" stroke-width="1.5"/>
-        <path d="M112 158 L112 232" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
-        <path d="M34 128 L112 152 L188 128 L112 108 Z" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="1"/>
-        <path d="M46 126 L112 146 L178 126 L112 110 Z" fill="rgba(17,13,12,.25)"/>
-        <g transform="translate(112 132) rotate(-16)">
-          <rect x="-8" y="-24" width="16" height="42" rx="4" fill="#F0DA8E" stroke="#8A6A2B" stroke-width="1"/>
-          <rect x="-6" y="-8" width="12" height="22" rx="3" fill="#9B1B1E"/>
-          <path d="M-4 -4 q3 6 8 8 M-2 2 q2 5 6 6" stroke="#C86A2A" stroke-width="1.2" fill="none"/>
-          <rect x="-6" y="-32" width="12" height="10" rx="2" fill="#A07B4B" stroke="#6B4E2C"/>
-        </g>
-        <path d="M60 60 L146 36 L230 60 L144 84 Z" fill="url(#walnut-top)" transform="translate(-30 40)"/>
-        <path d="M30 100 L116 76 L200 100 L114 124 Z" fill="none" stroke="#110D0C" stroke-width="1.2"/>
-        <g transform="translate(115 100) skewX(-6) scale(1 .55)" font-family="Cinzel,serif" font-size="12" fill="#C9A24D" text-anchor="middle">
-          <polygon points="-26,0 0,-16 26,0 0,16" fill="none" stroke="#C9A24D" stroke-width="1.2"/>
-          <text y="4" class="box-initials">H &amp; S</text>
-        </g>
-        <path d="M112 96 l-16 -8 M116 96 l16 -8" stroke="url(#gold-g)" stroke-width="3" stroke-linecap="round"/>
-      </svg>`
+    mandoos: `<img src="images/mandoos-walnut.jpg" alt="Open walnut mandoos with a saffron vial on woven Sadu cloth">`
   };
 
   // ---------- products ----------
@@ -600,7 +624,7 @@
     { id:'sachet', ar:'خيطة', name:'Khaitha Sachet', tag:'Henna night', tagClass:'red',
       desc:'A hand-woven Sadu pouch closed with the gold rope. Inside, a natural henna cone and a die-cut Sadu stencil card. Pull the thread after the henna is used and the strip becomes a wristband carrying your names.',
       list:['Real woven Sadu strip, wool on cotton','8 g natural BAQ henna cone, no PPD, no added dye','Sadu stencil card: triangle border, diamond, shajarah strip','2 ml lemon-sugar sealant vial, bilingual story card'],
-      cta:'Build it in 3D · four weaves, three ropes, three stoppers',
+      cta:'Build your sachet · three weaves, two cords, three stoppers, three buttons',
       price:45, unit:'per guest', min:'Minimum 50 · shipped chilled' },
     { id:'soap', ar:'وضحى', name:'Wadha Soap', tag:'Wedding day', tagClass:'',
       desc:'A cold-process olive and frankincense block on the white ground the weavers call wadha. A ring of real Sadu ribbon circles it, and the rope tag carries the couple’s shajarah.',
@@ -612,11 +636,9 @@
       price:120, unit:'per piece', min:'Family &amp; VIP tier · from 20' }
   ];
 
-  let cart = {}, shaj = null, sachetCfg = null;
+  let cart = {}, shaj = null;
   try { const s = localStorage.getItem('ylayla-cart'); if (s) cart = JSON.parse(s) || {}; } catch(e){}
-  try { const s = localStorage.getItem('ylayla-shajarah'); if (s) shaj = JSON.parse(s); } catch(e){}
-  try { const s = localStorage.getItem('ylayla-sachet-config'); if (s) sachetCfg = JSON.parse(s); } catch(e){}
-  const save = () => { try { localStorage.setItem('ylayla-cart', JSON.stringify(cart)); localStorage.setItem('ylayla-shajarah', JSON.stringify(shaj)); } catch(e){} };
+  try { const s = localStorage.getItem('ylayla-shajarah'); if (s) shaj = JSON.parse(s); } catch(e){}  const save = () => { try { localStorage.setItem('ylayla-cart', JSON.stringify(cart)); localStorage.setItem('ylayla-shajarah', JSON.stringify(shaj)); } catch(e){} };
 
   const grid = document.getElementById('products');
   grid.innerHTML = products.map((p, i) => `
@@ -627,7 +649,7 @@
         <div class="names"><h3>${p.name}</h3><span class="ar">${p.ar}</span></div>
         <p class="desc">${p.desc}</p>
         <ul>${p.list.map(l => `<li>${l}</li>`).join('')}</ul>
-        ${p.cta ? `<a class="customise" href="atelier.html">${p.cta}<span>→</span></a>` : ''}
+        ${p.cta ? `<a class="customise" href="sachets/builder/">${p.cta}<span>→</span></a>` : ''}
         <div class="buy">
           <div class="price"><span class="num">${AED(p.price)}</span><small>${p.unit}</small><span class="min">${p.min}</span></div>
           <div class="qty" aria-label="Quantity">
@@ -688,12 +710,11 @@
     } else {
       itemsEl.innerHTML = ids.map(id => {
         const p = products.find(x => x.id === id), q = cart[id];
-        const cfg = id === 'sachet' ? sachetCfg : null;
-        const unit = cfg && cfg.price ? cfg.price : p.price, amt = unit * q;
+        const unit = p.price, amt = unit * q;
         pieces += q; total += amt;
         return `<div class="line" data-id="${id}">
           <div class="sw"><svg width="44" height="44"><rect width="44" height="44" fill="url(#sadu)"/></svg></div>
-          <div><div class="n">${p.name}</div><div class="d">${AED(unit)} ${p.unit}${cfg ? `<br><span class="p">${esc(cfg.weave)} · ${esc(cfg.rope)} · ${esc(cfg.stopper)} · ${esc(cfg.ref)}</span>` : ''}${shaj ? ` · <span class="p">Laylat ${esc(shaj.n1)} &amp; ${esc(shaj.n2)}</span>` : ''}</div></div>
+          <div><div class="n">${p.name}</div><div class="d">${AED(unit)} ${p.unit}${shaj ? ` · <span class="p">Laylat ${esc(shaj.n1)} &amp; ${esc(shaj.n2)}</span>` : ''}</div></div>
           <div class="r"><span class="amt num">${AED(amt)}</span>
             <span class="mini"><button data-d="-1" aria-label="Fewer">−</button><span class="num">${q}</span><button data-d="1" aria-label="More">+</button></span></div>
         </div>`;
