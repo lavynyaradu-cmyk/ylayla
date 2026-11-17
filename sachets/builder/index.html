@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YLAYLA · Sachet builder</title>
+<style>
+  :root{--gold:#d9b05e;--ink:#e9d3a3;--bg:#0d0506;--line:rgba(217,176,94,.28)}
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif}
+  .wrap{display:grid;grid-template-columns:minmax(0,1fr) 340px;min-height:100vh}
+  .stage{display:flex;align-items:center;justify-content:center;padding:24px;background:#080304}
+  .stage canvas{width:100%;max-width:1200px;height:auto;display:block;box-shadow:0 30px 80px rgba(0,0,0,.6);transition:opacity .18s}
+  .stage canvas.busy{opacity:.82}
+  aside{border-left:1px solid var(--line);padding:26px 24px 30px;overflow:auto}
+  h1{font-size:12px;letter-spacing:.32em;text-transform:uppercase;font-weight:400;color:var(--gold);margin:0 0 4px}
+  .sub{font-size:13px;color:rgba(233,211,163,.6);margin:0 0 22px;font-style:italic}
+  .group{margin:0 0 22px}
+  .group h2{font-size:10px;letter-spacing:.26em;text-transform:uppercase;font-weight:400;margin:0 0 10px;color:rgba(233,211,163,.75);display:flex;justify-content:space-between}
+  .group h2 span{color:var(--gold);letter-spacing:.12em}
+  .opts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .opt{appearance:none;background:none;border:1px solid var(--line);padding:0;cursor:pointer;aspect-ratio:1;position:relative;overflow:hidden;color:var(--ink)}
+  .opt img{width:100%;height:100%;object-fit:cover;display:block}
+  .opt.none{display:flex;align-items:center;justify-content:center;font-size:9px;letter-spacing:.18em;text-transform:uppercase}
+  .opt.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+  .opt:disabled{opacity:.3;cursor:not-allowed}
+  .summary{border-top:1px solid var(--line);padding-top:16px;font-size:13px;line-height:1.7;color:rgba(233,211,163,.8)}
+  .actions{margin-top:16px;display:flex;gap:8px}
+  .actions button{flex:1;font:inherit;font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:11px 10px;background:none;color:var(--ink);border:1px solid var(--line);cursor:pointer}
+  .actions button.primary{background:var(--gold);color:#1a0b08;border-color:var(--gold)}
+  @media (max-width:900px){.wrap{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid var(--line)}.stage{padding:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="stage"><canvas id="view" width="1600" height="1195" aria-label="Sachet preview"></canvas></div>
+  <aside>
+    <h1>YLAYLA · Sachet builder</h1>
+    <p class="sub">Choose the cloth, cord, stoppers and button.</p>
+    <div id="groups"></div>
+    <div class="summary" id="summary"></div>
+    <div class="actions"><button id="random">Surprise me</button><button id="save" class="primary">Save image</button></div>
+  </aside>
+</div>
+<script>
+const catalog = [
+  { key:'fabric', title:'Fabric', options:[
+    { id:'01', name:'Red medallion' },
+    { id:'light', name:'Light Sadu' },
+    { id:'redblack', name:'Red & black Sadu' }
+  ]},
+  { key:'rope', title:'Cord', none:'No cord', options:[
+    { id:'gold-twisted', name:'Gold twisted' },
+    { id:'silver-twisted', name:'Silver twisted' }
+  ]},
+  { key:'stopper', title:'Stoppers', none:'None', needs:'rope', options:[
+    { id:'gold-tips', name:'Gold tips' },
+    { id:'bell', name:'Gold crystal bell' },
+    { id:'hourglass', name:'Silver hourglass' }
+  ]},
+  { key:'button', title:'Button', none:'None', options:[
+    { id:'gold-flower', name:'Gold crystal flower' },
+    { id:'silver-flower', name:'Silver crystal flower' },
+    { id:'gold-bow', name:'Gold bow' }
+  ]}
+];
+const state = { fabric:'01', rope:'gold-twisted', stopper:'gold-tips', button:null };
+const order = ['rope', 'stopper', 'button'];
+const view = document.getElementById('view'), ctx = view.getContext('2d');
+const cache = new Map();
+let manifest = null, drawId = 0;
+
+const load = src => {
+  if (!cache.has(src)) cache.set(src, new Promise((res, rej) => {
+    const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = src;
+  }));
+  return cache.get(src);
+};
+const thumb = (g, o) => `thumbs/${g.key}-${o.id}.jpg`;
+const label = (g, id) => id ? g.options.find(o => o.id === id).name : g.none;
+
+function renderControls() {
+  const host = document.getElementById('groups'); host.innerHTML = '';
+  for (const g of catalog) {
+    const blocked = g.needs && !state[g.needs];
+    const box = document.createElement('div'); box.className = 'group';
+    box.innerHTML = `<h2>${g.title}<span>${blocked ? '—' : label(g, state[g.key])}</span></h2><div class="opts"></div>`;
+    const opts = box.querySelector('.opts');
+    const add = (id, html, title) => {
+      const b = document.createElement('button');
+      b.className = 'opt' + (id === null ? ' none' : '') + (state[g.key] === id && !blocked ? ' on' : '');
+      b.title = title; b.setAttribute('aria-label', `${g.title}: ${title}`);
+      b.innerHTML = html; b.disabled = blocked;
+      b.onclick = () => { state[g.key] = id; renderControls(); draw(); };
+      opts.appendChild(b);
+    };
+    if (g.none) add(null, g.none, g.none);
+    for (const o of g.options) add(o.id, `<img src="${thumb(g, o)}" alt="">`, o.name);
+    host.appendChild(box);
+  }
+  document.getElementById('summary').innerHTML = catalog
+    .map(g => `${g.title}: <b>${g.needs && !state[g.needs] ? '—' : label(g, state[g.key])}</b>`).join('<br>');
+}
+
+async function draw() {
+  const id = ++drawId; view.classList.add('busy');
+  const f = state.fabric;
+  const cord = state.rope === 'silver-twisted' ? 'silver-' : '';
+  const names = order.filter(k => state[k] && !(k === 'stopper' && !state.rope))
+    .map(k => k === 'stopper' ? `stopper-${state[k]}-${cord}${f}` : `${k}-${state[k]}-${f}`);
+  const [base, ...layers] = await Promise.all([load(`base-${f}.jpg`), ...names.map(n => load(`layers/${n}.png`))]);
+  if (id !== drawId) return;
+  ctx.drawImage(base, 0, 0, view.width, view.height);
+  layers.forEach((im, i) => { const p = manifest.layers[names[i]]; ctx.drawImage(im, p.x, p.y, p.w, p.h); });
+  view.classList.remove('busy');
+}
+
+document.getElementById('random').onclick = () => {
+  for (const g of catalog) {
+    const ids = g.options.map(o => o.id).concat(g.none ? [null] : []);
+    state[g.key] = g.key === 'rope' ? g.options[Math.floor(Math.random() * g.options.length)].id : ids[Math.floor(Math.random() * ids.length)];
+  }
+  renderControls(); draw();
+};
+document.getElementById('save').onclick = () => {
+  view.toBlob(b => {
+    const a = document.createElement('a'); a.href = URL.createObjectURL(b);
+    a.download = `ylayla-sachet-${state.fabric}-${state.button || 'plain'}.jpg`; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }, 'image/jpeg', 0.92);
+};
+
+fetch('layers.json').then(r => r.json()).then(m => {
+  manifest = m; [view.width, view.height] = m.size;
+  renderControls(); draw();
+  for (const g of catalog) if (g.key === 'fabric') for (const o of g.options) load(`base-${o.id}.jpg`);
+});
+</script>
+</body>
+</html>

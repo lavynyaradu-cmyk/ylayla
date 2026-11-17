@@ -1,0 +1,206 @@
+{
+ "size": [
+  1600,
+  1195
+ ],
+ "layers": {
+  "button-gold-flower-01": {
+   "x": 591,
+   "y": 499,
+   "w": 256,
+   "h": 270
+  },
+  "button-silver-flower-01": {
+   "x": 571,
+   "y": 474,
+   "w": 309,
+   "h": 318
+  },
+  "button-gold-bow-01": {
+   "x": 599,
+   "y": 521,
+   "w": 252,
+   "h": 206
+  },
+  "button-gold-flower-light": {
+   "x": 626,
+   "y": 452,
+   "w": 312,
+   "h": 300
+  },
+  "button-silver-flower-light": {
+   "x": 622,
+   "y": 452,
+   "w": 315,
+   "h": 316
+  },
+  "button-gold-bow-light": {
+   "x": 629,
+   "y": 411,
+   "w": 297,
+   "h": 296
+  },
+  "button-gold-flower-redblack": {
+   "x": 609,
+   "y": 450,
+   "w": 308,
+   "h": 356
+  },
+  "button-silver-flower-redblack": {
+   "x": 611,
+   "y": 466,
+   "w": 306,
+   "h": 330
+  },
+  "button-gold-bow-redblack": {
+   "x": 640,
+   "y": 483,
+   "w": 259,
+   "h": 221
+  },
+  "rope-gold-twisted-01": {
+   "x": 251,
+   "y": 267,
+   "w": 1136,
+   "h": 842
+  },
+  "rope-silver-twisted-01": {
+   "x": 251,
+   "y": 267,
+   "w": 1136,
+   "h": 842
+  },
+  "stopper-gold-tips-01": {
+   "x": 254,
+   "y": 271,
+   "w": 1128,
+   "h": 801
+  },
+  "stopper-gold-tips-silver-01": {
+   "x": 262,
+   "y": 268,
+   "w": 1116,
+   "h": 794
+  },
+  "stopper-bell-01": {
+   "x": 259,
+   "y": 269,
+   "w": 1118,
+   "h": 808
+  },
+  "stopper-bell-silver-01": {
+   "x": 254,
+   "y": 268,
+   "w": 1126,
+   "h": 812
+  },
+  "stopper-hourglass-01": {
+   "x": 262,
+   "y": 274,
+   "w": 1116,
+   "h": 772
+  },
+  "stopper-hourglass-silver-01": {
+   "x": 259,
+   "y": 266,
+   "w": 1120,
+   "h": 767
+  },
+  "rope-gold-twisted-light": {
+   "x": 256,
+   "y": 263,
+   "w": 1132,
+   "h": 920
+  },
+  "rope-silver-twisted-light": {
+   "x": 256,
+   "y": 263,
+   "w": 1132,
+   "h": 920
+  },
+  "stopper-gold-tips-light": {
+   "x": 256,
+   "y": 222,
+   "w": 1124,
+   "h": 846
+  },
+  "stopper-gold-tips-silver-light": {
+   "x": 262,
+   "y": 227,
+   "w": 1095,
+   "h": 831
+  },
+  "stopper-bell-light": {
+   "x": 262,
+   "y": 219,
+   "w": 1089,
+   "h": 859
+  },
+  "stopper-bell-silver-light": {
+   "x": 261,
+   "y": 252,
+   "w": 1096,
+   "h": 834
+  },
+  "stopper-hourglass-light": {
+   "x": 263,
+   "y": 253,
+   "w": 1088,
+   "h": 793
+  },
+  "stopper-hourglass-silver-light": {
+   "x": 266,
+   "y": 265,
+   "w": 1084,
+   "h": 786
+  },
+  "rope-gold-twisted-redblack": {
+   "x": 253,
+   "y": 263,
+   "w": 1129,
+   "h": 872
+  },
+  "rope-silver-twisted-redblack": {
+   "x": 253,
+   "y": 263,
+   "w": 1129,
+   "h": 872
+  },
+  "stopper-gold-tips-redblack": {
+   "x": 260,
+   "y": 271,
+   "w": 1122,
+   "h": 797
+  },
+  "stopper-gold-tips-silver-redblack": {
+   "x": 267,
+   "y": 258,
+   "w": 1105,
+   "h": 787
+  },
+  "stopper-bell-redblack": {
+   "x": 263,
+   "y": 268,
+   "w": 1109,
+   "h": 809
+  },
+  "stopper-bell-silver-redblack": {
+   "x": 266,
+   "y": 262,
+   "w": 1130,
+   "h": 835
+  },
+  "stopper-hourglass-redblack": {
+   "x": 264,
+   "y": 246,
+   "w": 1108,
+   "h": 782
+  },
+  "stopper-hourglass-silver-redblack": {
+   "x": 264,
+   "y": 260,
+   "w": 1109,
+   "h": 788
+  }
+ }
+}
